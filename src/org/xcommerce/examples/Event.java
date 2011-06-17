@@ -84,6 +84,7 @@ public class Event implements Serializable {
 	 * */
 	public static void main (String args[]) {
 		Event e = new Event();
+		e.setId(new Integer(1));
 		e.setDate(new Date());
 		e.setTitle("Titulo");
 

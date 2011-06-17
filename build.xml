@@ -7,7 +7,7 @@
 	<property name="src"      value="${basedir}/src"/>
 	<property name="build"    value="${basedir}/build"/>
 	<property name="classdir" value="${build}/classes"/>
-	<property name="warDir"   value="${build}/build/war"/>
+	<property name="warDir"   value="${build}/war"/>
 	<property name="warFile"  value="xCommerce.war"/>
 
 	<path id="project.class.path">
@@ -27,7 +27,7 @@
 	<target name="all" depends="clean,init,build,buildWar"/>
 
 	<!-- Compile Java Files and store in /build/src directory -->
-	<target name="build" >
+	<target name="build" depends="init">
 		<javac srcdir="${src}" destdir="${classdir}" debug="true" includes="**/*.java">
 			<classpath refid="project.class.path"/>
 		</javac>
@@ -67,5 +67,11 @@
 	<target name="clean" >
 		<delete dir="build"/>
 		<delete file="xCommerce.war"/>
+	</target>
+	
+	<target name="run" depends="build">
+		<java dir="${basedir}" classname="org.xcommerce.examples.Event" fork="true" classpathref="project.class.path">
+			<classpath path="${classdir}:." />
+		</java>
 	</target>
 </project>

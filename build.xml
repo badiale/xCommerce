@@ -1,5 +1,18 @@
 <?xml version="1.0"?>
 <project name="xCommerce" default="all" basedir=".">
+	<macrodef name="git">
+		<attribute name = "command" />
+		<attribute name = "dir" default = "" />
+		<element name = "args" optional = "true" />
+		<sequential>
+			<echo file="GIT_COMMAND_LOG" message="git @{command} &#xa;"
+				append="yes" />
+			<exec executable = "git" dir = "@{dir}">
+				<arg value = "@{command}" />
+				<args/>
+			</exec>
+		</sequential>
+	</macrodef>
 
 	<!-- properties -->
 	<property name="lib"      value="${basedir}/lib"/>
@@ -73,5 +86,25 @@
 		<java dir="${basedir}" classname="org.xcommerce.examples.Event" fork="true" classpathref="project.class.path">
 			<classpath path="${classdir}:." />
 		</java>
+	</target>
+
+	<target name="pull">
+		<git command="pull" />
+	</target>
+
+	<target name="push" depends="clean">
+		<git command="add">
+			<args>
+				<arg value="." />
+			</args>
+		</git>
+		<git command="commit">
+			<args>
+				<arg value="-a" />
+				<arg value="-m" />
+				<arg value="teste do coiso" />
+			</args>
+		</git>
+		<git command="push" />
 	</target>
 </project>

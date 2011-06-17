@@ -102,7 +102,7 @@
 			<args>
 				<arg value="-a" />
 				<arg value="-m" />
-				<arg value="teste do coiso" />
+				<arg value="${mensagem}" />
 			</args>
 		</git>
 		<git command="push" />

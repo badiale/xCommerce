@@ -1,5 +1,6 @@
 To commit:
-	git commit -a
-	git push -u origin master
+	git add .
+	git commit -a -m "mensagem curta explicando as mudancas"
+	git push
 
 

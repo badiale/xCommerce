@@ -5,8 +5,6 @@
 		<attribute name = "dir" default = "" />
 		<element name = "args" optional = "true" />
 		<sequential>
-			<echo file="GIT_COMMAND_LOG" message="git @{command} &#xa;"
-				append="yes" />
 			<exec executable = "git" dir = "@{dir}">
 				<arg value = "@{command}" />
 				<args/>

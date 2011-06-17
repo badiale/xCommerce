@@ -81,7 +81,7 @@
 	</target>
 	
 	<target name="run" depends="build">
-		<java dir="${basedir}" classname="org.xcommerce.examples.Event" fork="true" classpathref="project.class.path">
+		<java dir="${basedir}" classname="org.xcommerce.examples.Heranca" fork="true" classpathref="project.class.path">
 			<classpath path="${classdir}:." />
 		</java>
 	</target>

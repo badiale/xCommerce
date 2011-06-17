@@ -31,8 +31,12 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">create</property>
 	
-	<!-- Mapeamento: colocar o nome da classe que vai ser mapeada -->
+		<!-- Mapeamento: colocar o nome da classe que vai ser mapeada -->
+
+		<!-- Mapeamento dos exemplos  -->
 		<mapping class="org.xcommerce.examples.Event"/>
+		<mapping class="org.xcommerce.examples.Pai"/>
+		<mapping class="org.xcommerce.examples.Heranca"/>
     </session-factory>
 
 </hibernate-configuration>

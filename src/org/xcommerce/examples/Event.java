@@ -1,7 +1,3 @@
-/**
- * Package with a lot of short examples on how to use some tecnologies.
- * @author Lucas Cuculo Badiale
- * */
 package org.xcommerce.examples;
 
 import org.xcommerce.db.DBManager;

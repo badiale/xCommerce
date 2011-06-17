@@ -1,6 +1,3 @@
-/**
- * Package with database connections handlers.
- * */
 package org.xcommerce.db;
 
 import org.hibernate.Session;

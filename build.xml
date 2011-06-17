@@ -31,6 +31,7 @@
 		<mkdir dir="${classdir}"/>
 		<mkdir dir="${warDir}/WEB-INF"/>
 		<mkdir dir="${warDir}/WEB-INF/classes"/>
+		<mkdir dir="${warDir}/WEB-INF/classes/org/xcommerce/bundles"/>
 		<mkdir dir="${warDir}/WEB-INF/lib"/>
 	</target>
 
@@ -57,6 +58,9 @@
 	<target name="buildWar" depends="init">
 		<copy todir="${warDir}/WEB-INF/classes">
 			<fileset dir="${classdir}" includes="**/*.class" /> 
+		</copy>
+		<copy todir="${warDir}/WEB-INF/classes/org/xcommerce/bundles">
+			<fileset dir="${src}/org/xcommerce/bundles/" includes="*.properties" />
 		</copy>
 
 		<copy todir="${warDir}/WEB-INF">

@@ -12,6 +12,10 @@
 		</sequential>
 	</macrodef>
 
+	<!-- variaveis -->
+	<property name="mainclass" value="org.xcommerce.examples.Heranca"/>
+	<property name="mensagem"  value="commit default"/>
+
 	<!-- properties -->
 	<property name="lib"      value="${basedir}/lib"/>
 	<property name="web"      value="${basedir}/web"/>
@@ -59,10 +63,16 @@
 		<copy todir="${warDir}/WEB-INF/classes">
 			<fileset dir="${classdir}" includes="**/*.class" /> 
 		</copy>
+		
 		<copy todir="${warDir}/WEB-INF/classes/org/xcommerce/bundles">
 			<fileset dir="${src}/org/xcommerce/bundles/" includes="*.properties" />
 		</copy>
 
+		<copy todir="${warDir}/WEB-INF/classes">
+			<fileset dir="${basedir}" includes="hibernate.*" />
+			<fileset dir="${basedir}" includes="log4j.properties" />
+		</copy>
+		
 		<copy todir="${warDir}/WEB-INF">
 			<fileset dir="${basedir}" includes="web.xml" /> 
 		</copy>
@@ -85,7 +95,7 @@
 	</target>
 	
 	<target name="run" depends="build">
-		<java dir="${basedir}" classname="org.xcommerce.examples.Heranca" fork="true" classpathref="project.class.path">
+		<java dir="${basedir}" classname="${mainclass}" fork="true" classpathref="project.class.path">
 			<classpath path="${classdir}:." />
 		</java>
 	</target>

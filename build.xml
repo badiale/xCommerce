@@ -15,6 +15,7 @@
 	<!-- variaveis -->
 	<property name="mainclass" value="org.xcommerce.examples.Heranca"/>
 	<property name="mensagem"  value="commit default"/>
+	<property name="arg"       value=""/>
 
 	<!-- properties -->
 	<property name="lib"      value="${basedir}/lib"/>
@@ -97,6 +98,7 @@
 	<target name="run" depends="build">
 		<java dir="${basedir}" classname="${mainclass}" fork="true" classpathref="project.class.path">
 			<classpath path="${classdir}:." />
+			<arg value="${arg}" />
 		</java>
 	</target>
 

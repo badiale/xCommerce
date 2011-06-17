@@ -32,6 +32,7 @@
         <property name="hbm2ddl.auto">create</property>
 	
 		<!-- Mapeamento: colocar o nome da classe que vai ser mapeada -->
+		<mapping class="org.xcommerce.beans.Produto"/>
 
 		<!-- Mapeamento dos exemplos  -->
 		<mapping class="org.xcommerce.examples.Event"/>

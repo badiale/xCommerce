@@ -48,6 +48,12 @@ public class Compra implements Serializable {
 		horaCompra = null;
 	}
 
+	public Compra(int codigo, String cliente, String horaCompra) {
+		this.codigo = codigo;
+		this.cliente = cliente;
+		this.horaCompra = horaCompra;
+	}
+
 	/**
 	 * Pega o codigo da compra.
 	 * @return o codigo da compra.
@@ -64,13 +70,13 @@ public class Compra implements Serializable {
 	 * Pega o email do cliente.
 	 * @return o email do cliente.
 	 * */
-    public String getCliente() { return this.nome; }
+    public String getCliente() { return this.cliente; }
 
 	/**
 	 * Define um email para o cliente.
 	 * @param novo email do cliente.
 	 * */
-    public void setCliente(String Cliente) { this.Cliente = Cliente; }
+    public void setCliente(String Cliente) { this.cliente = Cliente; }
 	
 	/**
 	 * Pega a data da compra.
@@ -172,10 +178,10 @@ public class Compra implements Serializable {
 	// testa insert
 	private static void teste01 () {
 		Compra c = new Compra();
-		p.setCliente("fudeu@progweb.com");
-		p.setHoraCompra("agora!");
+		c.setCliente("fudeu@progweb.com");
+		c.setHoraCompra("agora!");
 
-		p.insert();
+		c.insert();
 
 		log.debug("Compra inserido.");
 	}
@@ -185,7 +191,7 @@ public class Compra implements Serializable {
 		Compra c = Compra.find(new Integer(1));
 		log.debug("Produto encontrado.");
 
-		c.setEmail("deu@progweb.com");
+		c.setCliente("deu@progweb.com");
 		c.update();
 
 		log.debug("Compra atualizada.");
@@ -201,7 +207,7 @@ public class Compra implements Serializable {
 		
 		Iterator it = l.iterator();
 		while (it.hasNext()) {
-			Produto c = (Produto) it.next();
+			Compra c = (Compra) it.next();
 			log.info("Email do cliente: " + c.getCliente());
 		}
 

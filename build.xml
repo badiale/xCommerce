@@ -119,6 +119,7 @@
 				<arg value="${mensagem}" />
 			</args>
 		</git>
+		<git command="pull" />
 		<git command="push" />
 	</target>
 </project>

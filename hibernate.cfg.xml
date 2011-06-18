@@ -33,6 +33,7 @@
 	
 		<!-- Mapeamento: colocar o nome da classe que vai ser mapeada -->
 		<mapping class="org.xcommerce.beans.Produto"/>
+		<mapping class="org.xcommerce.beans.Compra"/>
 
 		<!-- Mapeamento dos exemplos  -->
 		<mapping class="org.xcommerce.examples.Event"/>

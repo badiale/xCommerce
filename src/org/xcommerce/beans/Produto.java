@@ -132,6 +132,9 @@ public class Produto implements Serializable {
 	 * @return Vector com os valores das caracteristicas do produto.
 	 * */
 	public Vector<String> getCaracteristicasValor() {return this.caracteristicasValor; }
+	
+	// TODO
+	// Set das imagens
 
 	// metodos dos beans
 	/**
@@ -144,13 +147,65 @@ public class Produto implements Serializable {
 		session.getTransaction().commit();
 	}
 
-	// TODO
-	// remove
-	// update
-	// finders
-	// next
+	/**
+	 * Remove o produto do banco.
+	 * */
+	public void remove() {
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		session.delete(this);
+		session.getTransaction().commit();
+	}
+
+	/**
+	 * Atualiza o produto no banco.
+	 * */
+	public void update() {
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		session.update(this);
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * Pega um produto, dado um ID.
+	 * @param id Id do produto.
+	 * @return Produto.
+	 * */
+	public static Produto find(Integer id) {
+		Produto p = new Produto();
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		session.load(p, id);
+		session.getTransaction().commit();
+		return p;
+	}
+	
+	/**
+	 * Retorna todos os produtos, que contenham uma certa string no nome.<BR>
+	 * <b>Este comando tem que ocorrer dentro de uma transacao.</b>
+	 * @param nome Filtro.
+	 * @return lista com todos os produtos que tem aquele nome.
+	 * */
+	public static List find(String nome) {
+		Session session = DBManager.getSession();
+		return session.createQuery(
+				"SELECT p FROM Produto p WHERE p.nome LIKE :nome"
+				).setParameter("nome", "%" + nome + "%").list();
+	}
+
+	/**
+	 * Retorna todos os produtos.<BR>
+	 * <b>Este comando tem que ocorrer dentro de uma transacao.</b>
+	 * @return lista com todos os produtos.
+	 * */
+	public static List findAll() {
+		Session session = DBManager.getSession();
+		return session.createQuery("SELECT p FROM Produto p").list();
+	}
 	
 	// testes de unidade
+	// testa insert
 	private static void teste01 () {
 		Produto p = new Produto();
 		p.setNome("negocio da china");
@@ -169,36 +224,75 @@ public class Produto implements Serializable {
 
 		p.insert();
 
-		log.info("Produto inserido.");
+		log.debug("Produto inserido.");
+	}
+
+	// testa find e remove
+	private static void teste02 () {
+		Produto p = Produto.find(new Integer(1));
+		log.debug("Produto encontrado.");
+
+		p.setNome("teste02");
+		p.update();
+
+		log.debug("Produto atualizado.");
+	}
+
+	// testa find all
+	private static void teste03() {
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+
+		List l = Produto.findAll();
+		log.debug("Pegou todos");
+		
+		Iterator it = l.iterator();
+		while (it.hasNext()) {
+			Produto p = (Produto) it.next();
+			log.info("Nome do produto: " + p.getNome());
+		}
+
+		log.debug("Exibiu todos os produtos.");
+		
+		session.getTransaction().commit();
+	}
+
+	// testa find pelo nome
+	private static void teste04() {
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		
+		log.info("Procurando por nome");
+		List l = Produto.find("t");
+		log.debug("Pegou todos");
+		
+		Iterator it = l.iterator();
+		while (it.hasNext()) {
+			Produto p = (Produto) it.next();
+			log.info("Nome do produto: " + p.getNome());
+		}
+		log.debug("Exibiu todos os produtos.");
+		
+		session.getTransaction().commit();
+	}
+
+	// testa remove
+	private static void teste05() {
+		Produto p = Produto.find(new Integer(1));
+		log.debug("Pegou o produto");
+
+		p.remove();
+		log.info("Produto removido");
 	}
 
 	/**
 	 * Main para executar os testes de unidade.
-	 * @param args Numero do teste a ser executado (numero entre 1 e 5).
 	 * */
 	public static void main (String args[]) {
-		// TODO trocar os println pelo log4j
-
-		int teste;
-		if (args.length != 1) {
-			log.error("Numero incorreto de argumentos.");
-			return;
-		}
-		
-		try {
-			teste = Integer.parseInt(args[0]);
-		} catch (Exception e) {
-			log.error("O valor fornecido nao eh um numero");
-			return;
-		}
-
-		switch (teste) {
-			case 1: Produto.teste01(); break;
-			case 2: break;
-			case 3: break;
-			case 4: break;
-			case 5: break;
-			default: log.error("Teste de unidade invalido.");
-		}
+		Produto.teste01();
+		Produto.teste02();
+		Produto.teste03();
+		Produto.teste04();
+		Produto.teste05();
 	}
 }

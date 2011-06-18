@@ -35,9 +35,7 @@
 		<mapping class="org.xcommerce.beans.Produto"/>
 
 		<!-- Mapeamento dos exemplos  -->
-		<mapping class="org.xcommerce.examples.Event"/>
-		<mapping class="org.xcommerce.examples.Pai"/>
-		<mapping class="org.xcommerce.examples.Heranca"/>
+		<mapping class="org.xcommerce.beans.Imagem"/>
     </session-factory>
 
 </hibernate-configuration>

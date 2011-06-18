@@ -78,8 +78,12 @@
 			<fileset dir="${basedir}" includes="web.xml" /> 
 		</copy>
 
+		<copy todir="${warDir}/WEB-INF/classes">
+			<fileset dir="${basedir}" includes="hibernate.*" /> 
+		</copy>
+
 		<copy todir="${warDir}">
-			<fileset dir="${web}" includes="**/*.*" /> 
+			<fileset dir="${web}" includes="**" /> 
 		</copy>
 
 		<copy todir="${warDir}/WEB-INF/lib">

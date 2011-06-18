@@ -40,13 +40,14 @@ public class Produto implements Serializable {
 	private Float preco;
 
 	@Column
-    private Vector<String> categorias;
+  private Vector<String> categorias;
 
 	@Column
 	private Vector<String> caracteristicas;
 	
 	@Column
 	private Vector<String> caracteristicasValor;
+
 	
 	/**
 	 * Logger que sera usado para esta classe.

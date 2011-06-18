@@ -17,9 +17,8 @@ public class OneA implements Serializable {
 	@Column(name="id_onea")
 	private Integer id;
 
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name="id_oneb")
-	@Cascade(CascadeType.ALL)
 	private OneB oneb;
 	
 	public OneA() {

@@ -33,9 +33,14 @@
 	
 		<!-- Mapeamento: colocar o nome da classe que vai ser mapeada -->
 		<mapping class="org.xcommerce.beans.Produto"/>
+		<mapping class="org.xcommerce.beans.Imagem"/>
 
 		<!-- Mapeamento dos exemplos  -->
-		<mapping class="org.xcommerce.beans.Imagem"/>
+		<mapping class="org.xcommerce.examples.OneA"/>
+		<mapping class="org.xcommerce.examples.OneB"/>
+		<mapping class="org.xcommerce.examples.Pai"/>
+		<mapping class="org.xcommerce.examples.Heranca"/>
+		<mapping class="org.xcommerce.examples.Event"/>
     </session-factory>
 
 </hibernate-configuration>

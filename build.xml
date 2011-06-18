@@ -20,9 +20,12 @@
 	<property name="classdir" value="${build}/classes"/>
 	<property name="warDir"   value="${build}/war"/>
 	<property name="warFile"  value="xCommerce.war"/>
+	<property name="webapps"  value="/home/fabio/IDE/apache-tomcat-7.0.11/webapps"/>
 
 	<path id="project.class.path">
 		<fileset dir="${lib}" includes="**/*.jar"/>
+		<!-- Lib do Tomcat para adicionar os JAR do J2EE (Servlets, JSP, etc..) -->
+		<fileset dir="/home/fabio/IDE/apache-tomcat-7.0.11/lib" includes="**/*.jar"/>
 	</path>
 
 	<target name="init">
@@ -67,8 +70,12 @@
 			<fileset dir="${basedir}" includes="web.xml" /> 
 		</copy>
 
+		<copy todir="${warDir}/WEB-INF/classes">
+			<fileset dir="${basedir}" includes="hibernate.*" /> 
+		</copy>
+
 		<copy todir="${warDir}">
-			<fileset dir="${web}" includes="**/*.*" /> 
+			<fileset dir="${web}" includes="**" /> 
 		</copy>
 
 		<copy todir="${warDir}/WEB-INF/lib">
@@ -85,7 +92,7 @@
 	</target>
 	
 	<target name="run" depends="build">
-		<java dir="${basedir}" classname="org.xcommerce.examples.Heranca" fork="true" classpathref="project.class.path">
+		<java dir="${basedir}" classname="org.xcommerce.beans.Imagem" fork="true" classpathref="project.class.path">
 			<classpath path="${classdir}:." />
 		</java>
 	</target>
@@ -108,5 +115,9 @@
 			</args>
 		</git>
 		<git command="push" />
+	</target>
+	
+	<target name="deploy" depends="all">
+		<move file="${warFile}" todir="${webapps}" />
 	</target>
 </project>

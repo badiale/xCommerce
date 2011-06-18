@@ -160,7 +160,7 @@ public class Compra implements Serializable {
 		return session.createQuery("SELECT c FROM Compra c").list();
 	}
 
-	public static Compra next(ResultSet rs) throws Exception {
+	/*public static Compra next(ResultSet rs) throws Exception {
             Compra compra = null;
 
             if (rs.next()) {
@@ -172,7 +172,7 @@ public class Compra implements Serializable {
             }
 
             return compra;
-	}
+	}*/
 	
 	// testes de unidade
 	// testa insert

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
+<%@page import="org.xcommerce.beans.Cliente" %>
 <%
 	Locale currentLocale = request.getLocale();
 	ResourceBundle msg = ResourceBundle.getBundle("org.xcommerce.bundles.message", currentLocale);
@@ -15,13 +16,16 @@
         <div id="wrapper">
             <div id="header"></div>
 	    <div id="login">
-		<form action="login.jsp">
+		<jsp:include page="/cliente/clienteservlet">
+		    <jsp:param name="op" value="4"/>
+		</jsp:include>
+		<!--form action="clienteservlet" method="post">
 		    <table>
-			<tr><td><%= msg.getString("EMAIL") %>:</td><td><input class="loginInputText" type="text" name="email"></td></tr>
-			<tr><td><%= msg.getString("PASSWORD") %>:</td><td><input class="loginInputText" type="password" name="password"></td></tr>
+			<tr><td><#%= msg.getString("EMAIL") %>:</td><td><input class="loginInputText" type="text" name="email"></td></tr>
+			<tr><td><#%= msg.getString("PASSWORD") %>:</td><td><input class="loginInputText" type="password" name="password"></td></tr>
 		    </table>
-		    <input id="submitLogin" type="submit" value="<%= msg.getString("LOGIN") %>">
-		</form>
+		    <input id="submitLogin" type="submit" value="<#%= msg.getString("LOGIN") %>">
+		</form-->
 	    </div>
             <div id="body-top"></div>
             <div id="content">

@@ -70,6 +70,10 @@ public class Produto implements Serializable {
 		nome = null;
 		descricao = null;
 		preco = null;
+<<<<<<< HEAD
+=======
+		//categorias = new Vector<String>();
+>>>>>>> 2b62f3919aafbb8efb72375a6864fc1d003f9c68
 		caracteristicas = new Vector<String>();
 		caracteristicasValor = new Vector<String>();
 		imagens = new HashSet<Imagem>();
@@ -230,6 +234,13 @@ public class Produto implements Serializable {
 		p.setDescricao("um otimo negocio esse!");
 		p.setPreco (new Float(1.99));
 
+<<<<<<< HEAD
+=======
+		//p.getCategorias().add("bom");
+		//p.getCategorias().add("bonito");
+		//p.getCategorias().add("barato");
+
+>>>>>>> 2b62f3919aafbb8efb72375a6864fc1d003f9c68
 		p.getCaracteristicas().add("Dimensoes");
 		p.getCaracteristicasValor().add("12x19x10 cm");
 

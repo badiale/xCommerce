@@ -37,6 +37,7 @@ public class EstoqueServlet extends HttpServlet {
 					Estoque e = null;
 					switch (function) {
 					case INSERT:
+					try {
 							targetUrl = "/xCommerce/message.jsp?msg=502";
 							e = new Estoque();
 							e.setCodigo(Integer.parseInt(request.getParameter("codigo")));
@@ -44,7 +45,7 @@ public class EstoqueServlet extends HttpServlet {
 							e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
 							e.setFornecedor(request.getParameter("fornecedor"));
 							
-							try {
+							
 								e.insert();
 							} catch (Exception ex) { ex.printStackTrace(); 
 								targetUrl = "/xCommerce/message.jsp?msg=501";
@@ -65,6 +66,7 @@ public class EstoqueServlet extends HttpServlet {
 							response.sendRedirect(targetUrl); 
 							break;
 					case UPDATE:
+					try {
 							targetUrl = "/xCommerce/message.jsp?msg=506";
 							e = new Estoque();
 							e.setCodigo(Integer.parseInt(request.getParameter("codigo")));
@@ -72,7 +74,7 @@ public class EstoqueServlet extends HttpServlet {
 							e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
 							e.setFornecedor(request.getParameter("fornecedor"));
 							
-							try {
+							
 								e.update();
 							} catch (Exception ex) { ex.printStackTrace();
 								targetUrl = "/xCommerce/message.jsp?msg=505";
@@ -86,7 +88,7 @@ public class EstoqueServlet extends HttpServlet {
 
 								e = Estoque.find(Integer.parseInt(request.getParameter("pcode")));
 								if (e == null) { 
-									targetUrl = "/xCommerce/message.jsp?msg=501";
+									targetUrl = "/xCommerce/message.jsp?msg=508";
 									response.sendRedirect(targetUrl);
 								}
 								out.println("<table>");

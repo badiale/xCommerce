@@ -74,18 +74,22 @@ public class EstoqueServlet extends HttpServlet {
 		   					session.beginTransaction();
 								List l = Estoque.findAll();
 								session.getTransaction().commit();
-							
+								Locale currentLocale = request.getLocale();
+		    				ResourceBundle msg = ResourceBundle.getBundle("org.xcommerce.bundles.message", currentLocale);
 								
 								Iterator it = l.iterator();
+								out.println("<table>");
+								out.println("<tr class=\"labelRow\"><th>COD</th><th>"+msg.getString("ESTOQUE_PRECO")+"</th> <th>"+msg.getString("ESTOQUE_QUANTIDADE")+"</th><th>"+msg.getString("ESTOQUE_FORNECEDOR")+"</th></tr>");
 								
 								while (it.hasNext()) {
-							
 									e = (Estoque) it.next();
-									out.println(e.getCodigo());
-									out.println(e.getPreco());
-									out.println(e.getQuantidade());
-									out.println(e.getFornecedor());
+									out.println("<tr class=\"labelRow\"><td class=\"idCell\">"+e.getCodigo()+"</td>");
+									out.println("<td>"+e.getPreco()+"</td>");
+									out.println("<td>"+e.getQuantidade()+"</td>");
+									out.println("<td>"+e.getFornecedor()+"</td></tr>");
 								}
+								out.println("</table>");
+								
 								
 
 							} catch (Exception ex) { ex.printStackTrace(); }

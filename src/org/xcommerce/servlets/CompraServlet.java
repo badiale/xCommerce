@@ -38,6 +38,7 @@ public class CompraServlet extends HttpServlet {
 							} catch (Exception ex) { ex.printStackTrace(); }
 							//TODO mensagem correta
 							response.sendRedirect("message.jsp?msg=501");
+							break;
 
 					case REMOVE:
 							c = new Compra();
@@ -50,7 +51,8 @@ public class CompraServlet extends HttpServlet {
 							} catch (Exception ex) { ex.printStackTrace(); }
 							//TODO mensagem correta
 							response.sendRedirect("message.jsp?msg=502");
-							
+							break;							
+
 					case UPDATE:
 							c = new Compra();
 							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
@@ -62,7 +64,8 @@ public class CompraServlet extends HttpServlet {
 							} catch (Exception ex) { ex.printStackTrace(); }
 							//TODO mensagem correta
 							response.sendRedirect("message.jsp?msg=503");
-							
+							break;							
+
 					case LIST:
 							try {
 								//TODO NA VIEW

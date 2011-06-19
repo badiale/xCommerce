@@ -83,7 +83,7 @@ public class EstoqueServlet extends HttpServlet {
 							break;
 					
 					case SHOW:
-							targetUrl = "/xCommerce/message.jsp?msg=507";
+							
 							try {
 							Session session = DBManager.getSession();
 
@@ -97,8 +97,11 @@ public class EstoqueServlet extends HttpServlet {
 								out.println("<td>"+e.getQuantidade()+"</td>");
 								out.println("<td>"+e.getFornecedor()+"</td></tr>");
 								out.println("</table>");
-							} catch (Exception ex) { ex.printStackTrace(); }
-								response.sendRedirect(targetUrl); 
+							} catch (Exception ex) { ex.printStackTrace(); 
+								targetUrl = "/xCommerce/message.jsp?msg=507";
+								response.sendRedirect(targetUrl);
+							}
+								 
 							break;
 							
 					case LIST:

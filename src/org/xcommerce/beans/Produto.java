@@ -48,11 +48,11 @@ public class Produto implements Serializable {
 	@Column
 	private Vector<String> caracteristicasValor;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="ecodigo")
 	private Estoque estoque;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "prodid")
 	private Set<Imagem> imagens;
 	
@@ -148,6 +148,12 @@ public class Produto implements Serializable {
 	 * */
 	public Set<Imagem> getImagens() { return this.imagens; }
 	
+	/**
+	 * Pega o estoque associado ao produto.
+	 * @return estoque.
+	 * */
+	public Estoque getEstoque() { return this.estoque; }
+
 	// metodos dos beans
 	/**
 	 * Insere o produto no banco.
@@ -160,7 +166,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	 * Remove o produto do banco.
+	 * Remove o produto do banco. <br>
+	 * <b>Cuidado: </B> Vai remover as imagens e as informacoes de estoque tambem.
 	 * */
 	public void remove() {
 		Session session = DBManager.getSession();

@@ -39,6 +39,7 @@ public class EstoqueServlet extends HttpServlet {
 								e.insert();
 							} catch (Exception ex) { ex.printStackTrace(); }
 							response.sendRedirect("message.jsp?msg=501");
+							break;
 
 					case REMOVE:
 							e = new Estoque();
@@ -51,7 +52,7 @@ public class EstoqueServlet extends HttpServlet {
 								e.remove();
 							} catch (Exception ex) { ex.printStackTrace(); }
 							response.sendRedirect("message.jsp?msg=502");
-							
+							break;
 					case UPDATE:
 							e = new Estoque();
 							e.setCodigo(Integer.parseInt(request.getParameter("codigo")));
@@ -63,13 +64,21 @@ public class EstoqueServlet extends HttpServlet {
 								e.update();
 							} catch (Exception ex) { ex.printStackTrace(); }
 							response.sendRedirect("message.jsp?msg=503");
-							
+							break;
 					case LIST:
 							try {
-								//TODO NA VIEW
-								e.findAll();
+								List l = Estoque.findAll();
+		
+								Iterator it = l.iterator();
+								while (it.hasNext()) {
+									e = (Estoque) it.next();
+									out.println(e.getCodigo());
+									out.println(e.getPreco());
+									out.println(e.getQuantidade());
+									out.println(e.getFornecedor());
+									out.println("OI");
+								}
 							} catch (Exception ex) { ex.printStackTrace(); }
-							//response.sendRedirect("message.jsp?msg=504");
 					}
 
   }

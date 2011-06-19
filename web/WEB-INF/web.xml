@@ -8,6 +8,14 @@
         <servlet-name>imagemservlet</servlet-name>
         <url-pattern>/imagem/imagemservlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EstoqueServlet</servlet-name>
+        <servlet-class>org.xcommerce.servlets.EstoqueServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EstoqueServlet</servlet-name>
+        <url-pattern>/estoque/EstoqueServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

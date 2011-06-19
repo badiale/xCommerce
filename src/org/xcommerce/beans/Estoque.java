@@ -217,6 +217,6 @@ public class Estoque implements Serializable {
 		teste01();
 		teste02();
 		teste03();
-		teste04();
+		//teste04();
 	}
 }

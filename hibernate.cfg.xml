@@ -37,6 +37,7 @@
 		<mapping class="org.xcommerce.beans.Imagem"/>
 		<mapping class="org.xcommerce.beans.Cliente"/>
 		<mapping class="org.xcommerce.beans.Estoque"/>
+		<mapping class="org.xcommerce.beans.LinhaDeCompra"/>
 
 		<!-- Mapeamento dos exemplos  -->
 		<mapping class="org.xcommerce.examples.OneA"/>

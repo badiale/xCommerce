@@ -39,8 +39,8 @@ public class Produto implements Serializable {
 	@Column
 	private Float preco;
 
-	@Column
-  private Vector<String> categorias;
+//	@Column
+//  private Vector<String> categorias;
 
 	@Column
 	private Vector<String> caracteristicas;
@@ -70,7 +70,6 @@ public class Produto implements Serializable {
 		nome = null;
 		descricao = null;
 		preco = null;
-		categorias = new Vector<String>();
 		caracteristicas = new Vector<String>();
 		caracteristicasValor = new Vector<String>();
 		imagens = new HashSet<Imagem>();
@@ -124,11 +123,11 @@ public class Produto implements Serializable {
 	 * */
 	public void setPreco (Float preco) { this.preco = preco; }
 	
-	/**
-	 * Pega o vetor de categorias.
-	 * @return Vector com as categorias deste produto.
-	 * */
-	public Vector<String> getCategorias() {return this.categorias; }
+//	/**
+//	 * Pega o vetor de categorias.
+//	 * @return Vector com as categorias deste produto.
+//	 * */
+//	public Vector<String> getCategorias() {return this.categorias; }
 	
 	/**
 	 * Pega o vetor de caracteristicas.
@@ -230,10 +229,6 @@ public class Produto implements Serializable {
 		p.setNome("negocio da china");
 		p.setDescricao("um otimo negocio esse!");
 		p.setPreco (new Float(1.99));
-
-		p.getCategorias().add("bom");
-		p.getCategorias().add("bonito");
-		p.getCategorias().add("barato");
 
 		p.getCaracteristicas().add("Dimensoes");
 		p.getCaracteristicasValor().add("12x19x10 cm");

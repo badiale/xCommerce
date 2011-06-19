@@ -17,14 +17,14 @@ import java.util.*;
  * @author Gabriel Perri Gimenes
  * */
 @Entity
-public class Produto implements Serializable {
+public class Estoque implements Serializable {
 
     @Id
     @Column
     private Integer codigo;
     
     @Column
-    private float preco;
+    private Float preco;
 	    
     @Column
     private Integer quantidade;
@@ -58,19 +58,19 @@ public class Produto implements Serializable {
 	 * Define um codigo para o estoque.
 	 * @param codigo novo codigo do estoque.
 	 * */
-    private void setCodigo(Integer codigo) { this.codigo = codigo; }
+    public void setCodigo(Integer codigo) { this.codigo = codigo; }
     
   /**
 	 * Pega o preco do estoque.
 	 * @return o preco do estoque.
 	 * */
-    public Integer getPreco() { return this.preco; }
+    public Float getPreco() { return this.preco; }
 
 	/**
 	 * Define um preco para o estoque.
 	 * @param preco novo preco do estoque.
 	 * */
-    private void setPreco(Integer preco) { this.preco = preco; }
+    public void setPreco(Float preco) { this.preco = preco; }
     
   /**
 	 * Pega a quantidade do estoque.
@@ -82,19 +82,19 @@ public class Produto implements Serializable {
 	 * Define uma quantidade para o estoque.
 	 * @param quantidade nova quantidade do estoque.
 	 * */
-    private void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
+    public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
     
   /**
 	 * Pega o fornecedor do estoque.
 	 * @return o fornecedor do estoque.
 	 * */
-    public Integer getFornecedor() { return this.fornecedor; }
+    public String getFornecedor() { return this.fornecedor; }
 
 	/**
 	 * Define um fornecedor para o estoque.
 	 * @param fornecedor novo fornecedor do estoque.
 	 * */
-    private void setFornecedor(Integer fornecedor) { this.fornecedor = fornecedor; }
+    public void setFornecedor(String fornecedor) { this.fornecedor = fornecedor; }
     
 	/**
 	 * Insere o estoque no banco.

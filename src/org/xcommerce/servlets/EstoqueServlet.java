@@ -1,5 +1,7 @@
 package org.xcommerce.servlets;
 
+import org.xcommerce.beans.*;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -8,12 +10,12 @@ import javax.servlet.http.*;
 import org.hibernate.Session;
 import util.*;
 
-public class Estoque extends HttpServlet {
+public class EstoqueServlet extends HttpServlet {
 
   private final int INSERT = 0;
   private final int REMOVE = 1;
   private final int UPDATE = 2;
-  private final int UPDATE = 3;
+  private final int LIST   = 3;
 
   public void doGet(HttpServletRequest request,
                     HttpServletResponse response)
@@ -23,49 +25,50 @@ public class Estoque extends HttpServlet {
 					Integer.parseInt(request.getParameter("function"));
 
 					PrintWriter out = response.getWriter();
-
+					
+					Estoque e = null;
 					switch (function) {
 					case INSERT:
-							org.xcommerce.beans.Estoque e = new org.xcommerce.beans.Estoque();
-							e.setCodigo(request.getParameter("codigo"));
-							e.setPreco(request.getParameter("preco"));
-							e.setQuantidade(request.getParameter("quantidade"));
+							e = new Estoque();
+							e.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+							e.setPreco(Float.parseFloat(request.getParameter("preco")));
+							e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
 							e.setFornecedor(request.getParameter("fornecedor"));
 							
 							try {
 								e.insert();
-							} catch (Exception e) { e.printStackTrace(); }
+							} catch (Exception ex) { ex.printStackTrace(); }
 							response.sendRedirect("message.jsp?msg=501");
 
 					case REMOVE:
-							org.xcommerce.beans.Estoque e = new org.xcommerce.beans.Estoque();
-							e.setCodigo(request.getParameter("codigo"));
-							e.setPreco(request.getParameter("preco"));
-							e.setQuantidade(request.getParameter("quantidade"));
+							e = new Estoque();
+							e.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+							e.setPreco(Float.parseFloat(request.getParameter("preco")));
+							e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
 							e.setFornecedor(request.getParameter("fornecedor"));
 							
 							try {
 								e.remove();
-							} catch (Exception e) { e.printStackTrace(); }
+							} catch (Exception ex) { ex.printStackTrace(); }
 							response.sendRedirect("message.jsp?msg=502");
 							
 					case UPDATE:
-							org.xcommerce.beans.Estoque e = new org.xcommerce.beans.Estoque();
-							e.setCodigo(request.getParameter("codigo"));
-							e.setPreco(request.getParameter("preco"));
-							e.setQuantidade(request.getParameter("quantidade"));
+							e = new Estoque();
+							e.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+							e.setPreco(Float.parseFloat(request.getParameter("preco")));
+							e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
 							e.setFornecedor(request.getParameter("fornecedor"));
 							
 							try {
 								e.update();
-							} catch (Exception e) { e.printStackTrace(); }
+							} catch (Exception ex) { ex.printStackTrace(); }
 							response.sendRedirect("message.jsp?msg=503");
 							
 					case LIST:
 							try {
 								//TODO NA VIEW
 								e.findAll();
-							} catch (Exception e) { e.printStackTrace(); }
+							} catch (Exception ex) { ex.printStackTrace(); }
 							//response.sendRedirect("message.jsp?msg=504");
 					}
 

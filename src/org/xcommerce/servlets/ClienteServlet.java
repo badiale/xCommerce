@@ -44,7 +44,7 @@ public class ClienteServlet extends HttpServlet {
 		try {
 		    client = (Cliente) session.getAttribute("cliente");
 		    if (client == null || ((client != null) &&
-	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())!=null))) {
+	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())==null))) {
 		        targetUrl = "/xCommerce/index.jsp";
 		    }
 		    if (targetUrl != null) {
@@ -92,7 +92,7 @@ public class ClienteServlet extends HttpServlet {
 		    ResourceBundle msg = ResourceBundle.getBundle("org.xcommerce.bundles.message", currentLocale);
 		    client = (Cliente) session.getAttribute("cliente");
 		    if (client == null || ((client != null) &&
-	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())!=null))) {
+	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())==null))) {
 			out.println("<form action=\"/xCommerce/cliente/clienteservlet\" method=\"get\">");
 			out.println("<input type=\"hidden\" name=\"op\" value=\"2\"/>");
 			out.println("<table>");
@@ -112,7 +112,7 @@ public class ClienteServlet extends HttpServlet {
 			out.println(msg.getString("GREETING")+" "+client.getNome()+"!<br/>");
 			out.println("<form action=\"clienteservlet\" method=\"get\">");
 			out.println("<input type=\"hidden\" name=\"op\" value=\"3\"/>");
-			out.println("<input id=\"submitLogin\" type=\"buttom\""+
+			out.println("<input id=\"submitLogin\" type=\"submit\""+
 				"value=\""+msg.getString("LOGOUT")+"\">");
 			out.println("</form>");
 		    }

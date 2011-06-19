@@ -7,7 +7,17 @@
     <servlet-mapping>
         <servlet-name>imagemservlet</servlet-name>
         <url-pattern>/imagem/imagemservlet</url-pattern>
-    </servlet-mapping>
+	</servlet-mapping>
+
+    <servlet>
+        <servlet-name>produto</servlet-name>
+        <servlet-class>org.xcommerce.servlets.ProdutoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>produto</servlet-name>
+        <url-pattern>/produto/produto</url-pattern>
+	</servlet-mapping>
+
     <servlet>
         <servlet-name>EstoqueServlet</servlet-name>
         <servlet-class>org.xcommerce.servlets.EstoqueServlet</servlet-class>
@@ -15,7 +25,8 @@
     <servlet-mapping>
         <servlet-name>EstoqueServlet</servlet-name>
         <url-pattern>/estoque/EstoqueServlet</url-pattern>
-    </servlet-mapping>
+	</servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

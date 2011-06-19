@@ -72,17 +72,22 @@ public class EstoqueServlet extends HttpServlet {
 								Session session = DBManager.getSession();
 		   					session.beginTransaction();
 								List l = Estoque.findAll();
-		
+								session.getTransaction().commit();
+							
+								
 								Iterator it = l.iterator();
+								
 								while (it.hasNext()) {
+							
 									e = (Estoque) it.next();
 									out.println(e.getCodigo());
 									out.println(e.getPreco());
 									out.println(e.getQuantidade());
 									out.println(e.getFornecedor());
-									out.println("OI");
 								}
+								
 							} catch (Exception ex) { ex.printStackTrace(); }
+								
 					}
 
   }

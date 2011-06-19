@@ -25,12 +25,9 @@
 	<property name="classdir" value="${build}/classes"/>
 	<property name="warDir"   value="${build}/war"/>
 	<property name="warFile"  value="xCommerce.war"/>
-	<property name="webapps"  value="/home/fabio/IDE/apache-tomcat-7.0.11/webapps"/>
 
 	<path id="project.class.path">
 		<fileset dir="${lib}" includes="**/*.jar"/>
-		<!-- Lib do Tomcat para adicionar os JAR do J2EE (Servlets, JSP, etc..) -->
-		<fileset dir="/home/fabio/IDE/apache-tomcat-7.0.11/lib" includes="**/*.jar"/>
 	</path>
 
 	<target name="init">
@@ -129,8 +126,5 @@
 		<git command="pull" />
 		<git command="push" />
 	</target>
-	
-	<target name="deploy" depends="all">
-		<move file="${warFile}" todir="${webapps}" />
-	</target>
 </project>
+

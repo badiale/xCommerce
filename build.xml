@@ -103,11 +103,7 @@
 	</target>
 	
 	<target name="run" depends="build">
-<<<<<<< HEAD
-		<java dir="${basedir}" classname="org.xcommerce.beans.Imagem" fork="true" classpathref="project.class.path">
-=======
 		<java dir="${basedir}" classname="${mainclass}" fork="true" classpathref="project.class.path">
->>>>>>> 1eb1c09d2c21ba8b555a221dc84b4782b73adfc0
 			<classpath path="${classdir}:." />
 			<arg value="${arg}" />
 		</java>

@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 // xCommerce Imports
 import org.xcommerce.beans.Imagem;
+import org.xcommerce.beans.Produto;
 import org.xcommerce.db.DBManager;
 // Hibernate Imports
 import org.hibernate.Session;
@@ -100,7 +101,7 @@ public class ImagemServlet extends HttpServlet {
 	    case UPLOAD:
 		try {
 		    Imagem image = new Imagem();
-		    image.setProdutoCod(pcode);
+		    image.setProduto(Produto.find(new Integer(pcode)));
 		    image.setDataCriacao(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 		    image.insert();
 		    File imageFile = new File(Imagem.imagesFolder+"/"+image.getId());
@@ -144,7 +145,8 @@ public class ImagemServlet extends HttpServlet {
 		    int code = Integer.parseInt(request.getParameter("pcode"));
 		    Session session = DBManager.getSession();
 		    session.beginTransaction();
-		    List images = Imagem.findByProduto(session,code);
+			Produto prod = Produto.find(new Integer(code));
+		    Set images = prod.getImagens();
 		    Iterator itr = images.iterator();
 		    Imagem image = null;
 		    Locale currentLocale = request.getLocale();
@@ -168,7 +170,8 @@ public class ImagemServlet extends HttpServlet {
 		    int code = Integer.parseInt(request.getParameter("pcode"));
 		    Session session = DBManager.getSession();
 		    session.beginTransaction();
-		    List images = Imagem.findByProduto(session,code);
+			Produto prod = Produto.find(new Integer(code));
+		    Set images = prod.getImagens();
 		    Iterator itr = images.iterator();
 		    Imagem image = null;
 		    Locale currentLocale = request.getLocale();

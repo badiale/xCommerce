@@ -1,3 +1,5 @@
 org.xcommerce.beans
+org.xcommerce.config
 org.xcommerce.db
 org.xcommerce.examples
+org.xcommerce.servlets

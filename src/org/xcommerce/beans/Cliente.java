@@ -12,7 +12,7 @@ import javax.persistence.*;
 import java.util.*;
 
 /**
- * .
+ * Cliente.
  * @author Lucas Cuculo Badiale
  * */
 @Entity

@@ -47,7 +47,10 @@ public class Produto implements Serializable {
 	
 	@Column
 	private Vector<String> caracteristicasValor;
-
+	
+	@OneToMany
+	@JoinColumn(name = "prodid")
+	private Set<Imagem> imagens;
 	
 	/**
 	 * Logger que sera usado para esta classe.
@@ -66,6 +69,7 @@ public class Produto implements Serializable {
 		categorias = new Vector<String>();
 		caracteristicas = new Vector<String>();
 		caracteristicasValor = new Vector<String>();
+		imagens = new Set<Imagem>();
 	}
 
 	/**
@@ -133,10 +137,13 @@ public class Produto implements Serializable {
 	 * @return Vector com os valores das caracteristicas do produto.
 	 * */
 	public Vector<String> getCaracteristicasValor() {return this.caracteristicasValor; }
-	
-	// TODO
-	// Set das imagens
 
+	/**
+	 * Pega o conjunto de fotos do produto.
+	 * @return conjunto de fotos do produto.
+	 * */
+	public Set<Imagem> getImagens() { return this.imagens; }
+	
 	// metodos dos beans
 	/**
 	 * Insere o produto no banco.
@@ -222,6 +229,12 @@ public class Produto implements Serializable {
 
 		p.getCaracteristicas().add("Peso");
 		p.getCaracteristicasValor().add("100 g");
+		
+		Imagem i = new Imagem();
+		i.setNome("Nomezim");
+		i.insert();
+
+		p.getImagens().add(i);
 
 		p.insert();
 

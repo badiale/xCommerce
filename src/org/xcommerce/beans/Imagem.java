@@ -15,15 +15,19 @@ import org.xcommerce.db.DBManager;  // Hibernate session handler
 @Table(name="imagens")
 public class Imagem implements Serializable, Config {
     public static String imagesFolder = appFolder+"/xCommerce/images/products";
-    @Id
+    
+	@Id
     @Column(name="id",unique=true,nullable=false)
     @SequenceGenerator(name="seq_id_imagem")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="seq_id_imagem")
     private Long id;
-    @Column(name="produtoCod",nullable=false)
-    private Integer produtoCod;
-    @Column(name = "dataCriacao")
+    
+	@Column(name = "dataCriacao")
     private String dataCriacao;
+    
+	@ManyToOne
+	@JoinColumn(name = "prodid")
+    private Produto produto;
     
     // Constructors
     public Imagem(){
@@ -39,11 +43,11 @@ public class Imagem implements Serializable, Config {
     
     // Setters
     public void setId (Long id) { this.id = id; }
-    public void setProdutoCod (int codigo) { this.produtoCod = new Integer(codigo); }
+    public void setProduto (Produto produto) { this.produto = produto; }
     public void setDataCriacao (String data) { this.dataCriacao = data; }
     // Getters
     public Long getId () { return this.id; }
-    public Integer getProdutoCod () { return this.produtoCod; }
+    public Produto getProduto () { return this.produto; }
     public String getDataCriacao () { return this.dataCriacao; }
     
     /**
@@ -96,21 +100,11 @@ public class Imagem implements Serializable, Config {
     }
     
     /**
-     * @param session Hibernate session (<code>DBManager.getSession()</code>).
-     * @param produto Product's code.
-     * @return List of images of the given product.
-     */
-    public static List findByProduto (Session session, Integer produto) {
-	String hql = "from Imagem imagem where imagem.produtoCod = "+produto;
-	return session.createQuery(hql).list();
-    }
-    
-    /**
      * Unit test for <code>insert()</code>
      */
     private static void UnitTest01 () {
 	Imagem imagem = new Imagem();
-	imagem.setProdutoCod(1);
+	imagem.setProduto(Produto.find(new Integer(1)));
 	imagem.setDataCriacao("2011/06/17 15:35:00");
 	try {
 	    imagem.insert();
@@ -125,7 +119,7 @@ public class Imagem implements Serializable, Config {
      */
     private static void UnitTest02 () {
 	Imagem imagem = new Imagem();
-	imagem.setProdutoCod(1);
+	imagem.setProduto(Produto.find(new Integer(1)));
 	imagem.setDataCriacao("2011/06/17 15:35:00");
 	try {
 	    imagem.insert();
@@ -179,7 +173,7 @@ public class Imagem implements Serializable, Config {
 	Session session = DBManager.getSession();
 	session.beginTransaction();
 	Imagem image = Imagem.findById(session,new Long(1));
-	System.out.print(image.getId()+" "+image.getProdutoCod()+" "+image.getDataCriacao());
+	System.out.print(image.getId()+" "+image.getProduto().getId()+" "+image.getDataCriacao());
     }
     /**
      * Unit test for <code>findByProduto()</code>

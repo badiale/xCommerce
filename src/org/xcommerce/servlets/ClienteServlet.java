@@ -93,7 +93,7 @@ public class ClienteServlet extends HttpServlet {
 		    client = (Cliente) session.getAttribute("cliente");
 		    if (client == null || ((client != null) &&
 	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())!=null))) {
-			out.println("<form action=\"clienteservlet\" method=\"post\">");
+			out.println("<form action=\"/xCommerce/cliente/clienteservlet\" method=\"get\">");
 			out.println("<input type=\"hidden\" name=\"op\" value=\"2\"/>");
 			out.println("<table>");
 			out.println("<tr><td>"+msg.getString("EMAIL")+":</td>"+
@@ -103,6 +103,8 @@ public class ClienteServlet extends HttpServlet {
 				"<td><input class=\"loginInputText\" type=\"password\""+
 				"name=\"senha\"></td></tr>");
 			out.println("</table>");
+			out.println("<a href=\"/xCommerce/cliente/register.jsp\">"+
+				msg.getString("REGISTER")+"</a>");
 			out.println("<input id=\"submitLogin\" type=\"submit\""+
 				"value=\""+msg.getString("LOGIN")+"\">");
 			out.println("</form>");

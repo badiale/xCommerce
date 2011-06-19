@@ -38,6 +38,10 @@ public class Cliente implements Serializable {
 
 	@Column
 	private Date dataCadastro;
+	
+	@OneToMany
+	@JoinColumn
+	private Set<Compra> compras;
 
 	/**
 	 * Pojo.
@@ -49,6 +53,7 @@ public class Cliente implements Serializable {
 		senha = null;
 		nascimento = null;
 		dataCadastro = null;
+		compras = new HashSet<Compra>();
 	}
 	
 	/**
@@ -105,8 +110,11 @@ public class Cliente implements Serializable {
 	 * */
 	public Date   getDataCadastro () { return this.dataCadastro; }
 
-	// TODO
-	// Set das compras 
+	/**
+	 * Pega as compras do cliente.
+	 * @return Set com as compras.
+	 * */
+	public Set<Compra> getCompras() { return this.compras; }
 
 	// metodos dos beans
 	/**
@@ -173,6 +181,11 @@ public class Cliente implements Serializable {
 		c.setEmail("ze@email.com");
 		c.setSenha("123");
 		c.setNascimento(new Date(1989, 5, 11));
+
+		Compra compra = new Compra();
+		compra.insert();
+		c.getCompras().add(compra);
+
 		c.insert();
 
 		log.info("Cliente inserido.");
@@ -208,7 +221,7 @@ public class Cliente implements Serializable {
 
 	// testa remove
 	private static void teste04() {
-		Cliente.find("ze@email.com").remove();
+		//Cliente.find("ze@email.com").remove();
 		log.info("Cliente removido");
 	}
 

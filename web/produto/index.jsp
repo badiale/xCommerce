@@ -15,9 +15,9 @@
 		</td>
 	</tr>
 	<tr>
-		<td width="20%"><img src="imagem.jpg" width="300" height="300"></td>
-		<td width="60%">Nome do produto</td>
-		<td width="20%">
+		<td width="10%"><img src="imagem.jpg" width="300" height="300"></td>
+		<td width="80%">Nome do produto</td>
+		<td width="10%">
 			<a href="/xCommerce/produto/buy.jsp?codigo=codigo"><%= msg.getString("PRODUTO_BUY") %></a>
 			<!-- se for admim -->
 			<BR><a href="/xCommerce/produto/edit.jsp?codigo=codigo"><%= msg.getString("PRODUTO_EDIT") %></a>

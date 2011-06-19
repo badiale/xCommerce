@@ -21,49 +21,56 @@ public class CompraServlet extends HttpServlet {
                     HttpServletResponse response)
       throws ServletException, IOException {
       
-//					int function =
-//					Integer.parseInt(request.getParameter("function"));
-//
-//					PrintWriter out = response.getWriter();
-//					
-//					Compra c = null;
-//					switch (function) {
-//					case INSERT:
-//							c = new Compra();
-//							c.setPreco(Float.parseFloat(request.getParameter("cliente")));
-//							c.setQuantidade(Integer.parseInt(request.getParameter("horaCompra")));
-//							try {
-//								c.insert();
-//							} catch (Exception ex) { ex.printStackTrace(); }
-//							//TODO mensagem correta
-//							response.sendRedirect("message.jsp?msg=501");
-//
-//					case REMOVE:
-//							c = Compra.find(Integer.parseInt(request.getParameter("codigo")));
-//							try {
-//								c.remove();
-//							} catch (Exception ex) { ex.printStackTrace(); }
-//							//TODO mensagem correta
-//							response.sendRedirect("message.jsp?msg=502");
-//							
-//					case UPDATE:
-//							c = Compra.find(Integer.parseInt(request.getParameter("codigo")));
-//							c.setPreco(Float.parseFloat(request.getParameter("cliente")));
-//							c.setQuantidade(Integer.parseInt(request.getParameter("horaCompra")));
-//							
-//							try {
-//								c.update();
-//							} catch (Exception ex) { ex.printStackTrace(); }
-//							//TODO mensagem correta
-//							response.sendRedirect("message.jsp?msg=503");
-//							
-//					case LIST:
-//							try {
-//								//TODO NA VIEW
-//								c.findAll();
-//							} catch (Exception ex) { ex.printStackTrace(); }
-//							//response.sendRedirect("message.jsp?msg=504");
-//					}
+					int function =
+					Integer.parseInt(request.getParameter("function"));
+
+					PrintWriter out = response.getWriter();
+					
+					Compra c = null;
+					switch (function) {
+					case INSERT:
+							c = new Compra();
+							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+							c.setCliente(Cliente.find(request.getParameter("email")));
+							c.setHoraCompra(request.getParameter("horaCompra"));
+							try {
+								c.insert();
+							} catch (Exception ex) { ex.printStackTrace(); }
+							//TODO mensagem correta
+							response.sendRedirect("message.jsp?msg=501");
+
+					case REMOVE:
+							c = new Compra();
+							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+							c.setCliente(Cliente.find(request.getParameter("email")));
+							c.setHoraCompra(request.getParameter("horaCompra"));
+							
+							try {
+								c.remove();
+							} catch (Exception ex) { ex.printStackTrace(); }
+							//TODO mensagem correta
+							response.sendRedirect("message.jsp?msg=502");
+							
+					case UPDATE:
+							c = new Compra();
+							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+							c.setCliente(Cliente.find(request.getParameter("email")));
+							c.setHoraCompra(request.getParameter("horaCompra"));
+							
+							try {
+								c.update();
+							} catch (Exception ex) { ex.printStackTrace(); }
+							//TODO mensagem correta
+							response.sendRedirect("message.jsp?msg=503");
+							
+					case LIST:
+							try {
+								//TODO NA VIEW
+								c.findAll();
+							} catch (Exception ex) { ex.printStackTrace(); }
+							//TODO mensagem correta
+							//response.sendRedirect("message.jsp?msg=504");
+					}
 
   }
 

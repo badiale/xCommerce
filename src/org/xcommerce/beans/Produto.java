@@ -72,6 +72,7 @@ public class Produto implements Serializable {
 		preco = null;
 
 		//categorias = new Vector<String>();
+
 		caracteristicas = new Vector<String>();
 		caracteristicasValor = new Vector<String>();
 		imagens = new HashSet<Imagem>();
@@ -236,7 +237,6 @@ public class Produto implements Serializable {
 		//p.getCategorias().add("bom");
 		//p.getCategorias().add("bonito");
 		//p.getCategorias().add("barato");
-
 
 		p.getCaracteristicas().add("Dimensoes");
 		p.getCaracteristicasValor().add("12x19x10 cm");

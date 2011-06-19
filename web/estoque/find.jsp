@@ -12,13 +12,13 @@
     <label for="preco"><%=msg.getString("ESTOQUE_PRECO")%></label><input type="text" name="preco"/><br/>
     <label for="quantidade"><%=msg.getString("ESTOQUE_QUANTIDADE")%></label><input type="text" name="quantidade"/><br/>
     <label for="fornecedor"><%=msg.getString("ESTOQUE_FORNECEDOR")%></label><input type="text" name="fornecedor"/><br/>
-    <input type="submit" value="Modificar"/><br/>
+    <input type="submit" value="<%=msg.getString("MODIFICAR_ESTOQUE")%>"/><br/>
 </form>
 
 <form action="EstoqueServlet" method="post">
     <input type="hidden" name="function" value="1"/>
     <input type="hidden" name="codigo" value="<%= pcode %>"/>
-    <input type="submit" value="Remover"/><br/>
+    <input type="submit" value="<%=msg.getString("REMOVER_ESTOQUE")%>"/><br/>
 </form>
 
 

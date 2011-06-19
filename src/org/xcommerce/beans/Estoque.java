@@ -187,6 +187,7 @@ public class Estoque implements Serializable {
 		session.beginTransaction();
 
 		List l = Estoque.findAll();
+		session.getTransaction().commit();
 		log.debug("Pegou todos");
 		
 		Iterator it = l.iterator();
@@ -197,7 +198,7 @@ public class Estoque implements Serializable {
 
 		log.debug("Exibiu todos os estoques.");
 		
-		session.getTransaction().commit();
+		
 	}
 
 

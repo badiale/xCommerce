@@ -126,5 +126,10 @@
 		<git command="pull" />
 		<git command="push" />
 	</target>
+
+	<property name="webapps" value="/home/fabio/IDE/apache-tomcat-7.0.11/webapps"/>
+	<target name="deploy" depends="all">
+		<move file="${warFile}" todir="${webapps}"/>
+	</target>
 </project>
 

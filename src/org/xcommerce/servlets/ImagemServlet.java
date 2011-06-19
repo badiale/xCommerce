@@ -128,6 +128,7 @@ public class ImagemServlet extends HttpServlet {
 			Session session = DBManager.getSession();
 			session.beginTransaction();
 			Imagem image = Imagem.findById(session,fileid);
+			session.getTransaction().commit();
 			if (image != null) {
 			    image.remove();
 			    targetUrl="/xCommerce/message.jsp?msg=103";
@@ -147,6 +148,7 @@ public class ImagemServlet extends HttpServlet {
 		    session.beginTransaction();
 			Produto prod = Produto.find(new Integer(code));
 		    Set images = prod.getImagens();
+		    session.getTransaction().commit();
 		    Iterator itr = images.iterator();
 		    Imagem image = null;
 		    Locale currentLocale = request.getLocale();
@@ -171,6 +173,7 @@ public class ImagemServlet extends HttpServlet {
 		    Session session = DBManager.getSession();
 		    session.beginTransaction();
 			Produto prod = Produto.find(new Integer(code));
+		    session.getTransaction().commit();
 		    Set images = prod.getImagens();
 		    Iterator itr = images.iterator();
 		    Imagem image = null;

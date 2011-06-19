@@ -16,18 +16,23 @@ import org.xcommerce.db.DBManager;  // Hibernate session handler
 public class Imagem implements Serializable, Config {
     public static String imagesFolder = appFolder+"/xCommerce/images/products";
     
-	@Id
+    @Id
     @Column(name="id",unique=true,nullable=false)
     @SequenceGenerator(name="seq_id_imagem")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="seq_id_imagem")
     private Long id;
     
-	@Column(name = "dataCriacao")
+    @Column(name = "dataCriacao")
     private String dataCriacao;
     
-	@ManyToOne
-	@JoinColumn(name = "prodid")
+    @ManyToOne
+    @JoinColumn(name = "prodid")
     private Produto produto;
+    
+    static {
+	File filesdir = new File(imagesFolder);
+	filesdir.mkdir();
+    }
     
     // Constructors
     public Imagem(){

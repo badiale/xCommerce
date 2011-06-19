@@ -12,7 +12,7 @@ import javax.persistence.*;
 import java.util.*;
 
 /**
- * .
+ * Cliente.
  * @author Lucas Cuculo Badiale
  * */
 @Entity
@@ -183,6 +183,7 @@ public class Cliente implements Serializable {
 		c.setNascimento(new Date(1989, 5, 11));
 
 		Compra compra = new Compra();
+		compra.setHoraCompra("compra");
 		compra.insert();
 		c.getCompras().add(compra);
 
@@ -212,6 +213,12 @@ public class Cliente implements Serializable {
 		while (i.hasNext()) {
 			Cliente c = (Cliente) i.next();
 			log.info("Nome: " + c.getNome());
+
+			Iterator ic = c.getCompras().iterator();
+			while (ic.hasNext()) {
+				Compra compra = (Compra) ic.next();
+				log.info("Comprou: " + compra.getHoraCompra());
+			}
 		}
 
 		log.info("Todos exibidos");

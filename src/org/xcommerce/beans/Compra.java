@@ -31,6 +31,10 @@ public class Compra implements Serializable {
 	@JoinColumn(name = "clienteemail")
     private Cliente cliente;
 	
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "lcompraid")
+	private Set<LinhaDeCompra> linhasCompra;
+
 	@Column
 	private String horaCompra;
 	
@@ -44,16 +48,17 @@ public class Compra implements Serializable {
 	 * Hibernate obriga a criacao de um Pojo.
 	 * */
     public Compra() {
+		linhasCompra = new HashSet<LinhaDeCompra>();
 		codigo = null;
 		cliente = null;
 		horaCompra = null;
 	}
 
-	public Compra(int codigo, Cliente cliente, String horaCompra) {
+	/*public Compra(int codigo, Cliente cliente, String horaCompra) {
 		this.codigo = codigo;
 		this.cliente = cliente;
 		this.horaCompra = horaCompra;
-	}
+	}*/
 
 	/**
 	 * Pega o codigo da compra.
@@ -91,9 +96,31 @@ public class Compra implements Serializable {
 	 * */
     public void setHoraCompra(String horaCompra) { this.horaCompra = horaCompra; }
 
+	/**
+	 * Pega o conjunto de <code>LinhaDeCompra</code> da compra.
+	 * @return conjunto de <code>LinhaDeCompra</code> da compra.
+	 * */
+	public Set<LinhaDeCompra> getLinhasCompra() { return this.linhasCompra; }
+
 	// metodos dos beans
 
-	//TODO calcula o total da compra
+	/**
+	 * Calcula o total da compra.
+	 * @return total da compra.
+	 * */
+	public float total() {
+		float total = new Float(0.0);
+		Set linhas = this.linhasCompra;		
+	
+		Iterator it = linhas.iterator();
+		
+		while (it.hasNext()) {
+			LinhaDeCompra lc = (LinhaDeCompra) it.next();
+			total = total + lc.subTotal();
+		}
+
+		return total;
+	}
 
 	/**
 	 * Insere a compra no banco.

@@ -127,7 +127,11 @@ public class LinhaDeCompra implements Serializable {
 
 	// metodos dos beans
 
-	//TODO subTotal()  ?
+	/**
+	 * Retorna o subTotal de uma linha de compra.
+	 * @return <code>subTotal</code>.
+	 * */
+	public float subTotal() { return (float) (this.quantidade * this.precoUnitario); }
 
 	/**
 	 * Insere a LinhaDeCompra no banco.

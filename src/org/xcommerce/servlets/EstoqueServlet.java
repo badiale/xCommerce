@@ -70,18 +70,18 @@ public class EstoqueServlet extends HttpServlet {
 					case LIST:
 							try {
 								Session session = DBManager.getSession();
-		   					session.beginTransaction();
-								List l = Estoque.findAll();
-		
-								Iterator it = l.iterator();
-								while (it.hasNext()) {
-									e = (Estoque) it.next();
-									out.println(e.getCodigo());
-									out.println(e.getPreco());
-									out.println(e.getQuantidade());
-									out.println(e.getFornecedor());
-									out.println("OI");
-								}
+								session.beginTransaction();
+//								List l = Estoque.findAll();
+//									
+//								Iterator it = l.iterator();
+//								while (it.hasNext()) {
+//									e = (Estoque) it.next();
+//									out.println(e.getCodigo());
+//									out.println(e.getPreco());
+//									out.println(e.getQuantidade());
+//									out.println(e.getFornecedor());
+//									out.println("OI");
+//								}
 							} catch (Exception ex) { ex.printStackTrace(); }
 					}
 

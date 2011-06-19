@@ -88,7 +88,7 @@ public class EstoqueServlet extends HttpServlet {
 							Session session = DBManager.getSession();
 
 		   					session.beginTransaction();
-								e = Estoque.find(Integer.parseInt(request.getParameter("codigo")));
+								e = Estoque.find(Integer.parseInt(request.getParameter("pcode")));
 								session.getTransaction().commit();
 								out.println("<table>");
 								out.println("<tr class=\"labelRow\"><th>COD</th><th>"+msg.getString("ESTOQUE_PRECO")+"</th> <th>"+msg.getString("ESTOQUE_QUANTIDADE")+"</th><th>"+msg.getString("ESTOQUE_FORNECEDOR")+"</th></tr>");

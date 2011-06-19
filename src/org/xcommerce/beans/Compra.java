@@ -67,17 +67,22 @@ public class Compra implements Serializable {
 	 * */
     private void setCodigo(Integer codigo) { this.codigo = codigo; }
 	
+	/** Retorna um objeto cliente associado a compra
+	 * @return objeto Cliente
+	 **/
+	public Cliente getClient() { return cliente }
+
 	/**
 	 * Pega o email do cliente.
 	 * @return o email do cliente.
 	 * */
-    public Cliente getCliente() { return this.cliente; }
+    public String getClienteEmail() { return this.cliente; }
 
 	/**
 	 * Define um email para o cliente.
 	 * @param novo email do cliente.
 	 * */
-    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+    public void setClienteEmail(String cliente) { this.cliente = cliente; }
 	
 	/**
 	 * Pega a data da compra.

@@ -31,8 +31,8 @@ public class EstoqueServlet extends HttpServlet {
 					case INSERT:
 							c = new Compra();
 							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
-							c.setPreco(request.getParameter("cliente");
-							c.setQuantidade(request.getParameter("horaCompra");
+							c.setClienteEmail(request.getParameter("cliente"));
+							c.setHoraCompra(request.getParameter("horaCompra"));
 							try {
 								c.insert();
 							} catch (Exception ex) { ex.printStackTrace(); }
@@ -42,8 +42,8 @@ public class EstoqueServlet extends HttpServlet {
 					case REMOVE:
 							c = new Compra();
 							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
-							c.setPreco(request.getParameter("cliente");
-							c.setQuantidade(request.getParameter("horaCompra");
+							c.setClienteEmail(request.getParameter("cliente"));
+							c.setHoraCompra(request.getParameter("horaCompra"));
 							
 							try {
 								c.remove();
@@ -54,8 +54,8 @@ public class EstoqueServlet extends HttpServlet {
 					case UPDATE:
 							c = new Compra();
 							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
-							c.setPreco(request.getParameter("cliente");
-							c.setQuantidade(request.getParameter("horaCompra");
+							c.setClienteEmail(request.getParameter("cliente"));
+							c.setHoraCompra(request.getParameter("horaCompra"));
 							
 							try {
 								c.update();

@@ -27,8 +27,9 @@ public class Compra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_comprid")
     private Integer codigo;
 
-    @Column
-    private String cliente;
+    @ManyToOne
+	@JoinColumn(name = "clienteemail")
+    private Cliente cliente;
 	
 	@Column
 	private String horaCompra;
@@ -48,6 +49,12 @@ public class Compra implements Serializable {
 		horaCompra = null;
 	}
 
+	public Compra(int codigo, Cliente cliente, String horaCompra) {
+		this.codigo = codigo;
+		this.cliente = cliente;
+		this.horaCompra = horaCompra;
+	}
+
 	/**
 	 * Pega o codigo da compra.
 	 * @return o codigo da compra.
@@ -64,13 +71,13 @@ public class Compra implements Serializable {
 	 * Pega o email do cliente.
 	 * @return o email do cliente.
 	 * */
-    public String getCliente() { return this.nome; }
+    public Cliente getCliente() { return this.cliente; }
 
 	/**
 	 * Define um email para o cliente.
 	 * @param novo email do cliente.
 	 * */
-    public void setCliente(String Cliente) { this.Cliente = Cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
 	
 	/**
 	 * Pega a data da compra.
@@ -154,7 +161,7 @@ public class Compra implements Serializable {
 		return session.createQuery("SELECT c FROM Compra c").list();
 	}
 
-	public static Compra next(ResultSet rs) throws Exception {
+	/*public static Compra next(ResultSet rs) throws Exception {
             Compra compra = null;
 
             if (rs.next()) {
@@ -166,16 +173,20 @@ public class Compra implements Serializable {
             }
 
             return compra;
-	}
+	}*/
 	
 	// testes de unidade
 	// testa insert
 	private static void teste01 () {
-		Compra c = new Compra();
-		p.setCliente("fudeu@progweb.com");
-		p.setHoraCompra("agora!");
+		Cliente cliente = new Cliente();
+		cliente.setEmail("ze@email.com");
+		cliente.insert();
 
-		p.insert();
+		Compra c = new Compra();
+		c.setCliente(cliente);
+		c.setHoraCompra("agora!");
+
+		c.insert();
 
 		log.debug("Compra inserido.");
 	}
@@ -185,7 +196,7 @@ public class Compra implements Serializable {
 		Compra c = Compra.find(new Integer(1));
 		log.debug("Produto encontrado.");
 
-		c.setEmail("deu@progweb.com");
+		c.setCliente(Cliente.find("ze@email.com"));
 		c.update();
 
 		log.debug("Compra atualizada.");
@@ -201,7 +212,7 @@ public class Compra implements Serializable {
 		
 		Iterator it = l.iterator();
 		while (it.hasNext()) {
-			Produto c = (Produto) it.next();
+			Compra c = (Compra) it.next();
 			log.info("Email do cliente: " + c.getCliente());
 		}
 

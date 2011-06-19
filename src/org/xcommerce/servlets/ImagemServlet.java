@@ -36,9 +36,8 @@ public class ImagemServlet extends HttpServlet {
 	// Authentication
 	HttpSession httpsession = request.getSession();
 	/*Cliente client = (Cliente) httpsession.getAttibute("cliente");
-	
 	if (client == null) {
-	    targetUrl = "/message.jsp?msg=0";
+	    targetUrl = "/xCommerce/message.jsp?msg=0";
 	    response.sendRedirect(targetUrl);
 	}
 	*/
@@ -57,8 +56,8 @@ public class ImagemServlet extends HttpServlet {
 	    try {
 		items = upload.parseRequest(request);
 	    } catch (FileUploadException e) {
-		System.err.println("ERRO:ImagemServlet: "+e);
-		e.printStackTrace();
+		targetUrl = "/xCommerce/message.jsp?msg=100";
+		response.sendRedirect(targetUrl);
 	    }
 
 	    Iterator itr = items.iterator();
@@ -71,14 +70,14 @@ public class ImagemServlet extends HttpServlet {
 			try {
 			    operation = Integer.parseInt(item.getString());
 			} catch (Exception e) {
-			    targetUrl = "message.jsp?msg=0";
+			    targetUrl = "/xCommerce/message.jsp?msg=100";
 			    response.sendRedirect(targetUrl);
 			}
 		    } else if (item.getFieldName().equals("pcode")) {
 			try {
 			    pcode = Integer.parseInt(item.getString());
 			} catch (Exception e) {
-			    targetUrl = "message.jsp?msg=0";
+			    targetUrl = "/xCommerce/message.jsp?msg=100";
 			    response.sendRedirect(targetUrl);
 			}
 		    }
@@ -91,7 +90,7 @@ public class ImagemServlet extends HttpServlet {
 		operation = Integer.parseInt(request.getParameter("op"));
 		pcode = Integer.parseInt(request.getParameter("pcode"));
 	    } catch (Exception e) {
-		targetUrl = "message.jsp?msg=0";
+		targetUrl = "/xCommerce/message.jsp?msg=100";
 		response.sendRedirect(targetUrl);
 	    }
 	}
@@ -105,23 +104,38 @@ public class ImagemServlet extends HttpServlet {
 		    image.setDataCriacao(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 		    image.insert();
 		    File imageFile = new File(Imagem.imagesFolder+"/"+image.getId());
-		    fitem.write(imageFile);
-		    targetUrl="message.jsp?msg=0";
+		    if (fitem.getContentType().equals("image/jpeg") ||
+			    fitem.getContentType().equals("image/png") ||
+			    fitem.getContentType().equals("image/bmp")) {
+			fitem.write(imageFile);
+			targetUrl="/xCommerce/message.jsp?msg=101";
+		    } else {
+			targetUrl="/xCommerce/message.jsp?msg=106";
+		    }
 		} catch (Exception e) {
-		    targetUrl = "message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=102";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
 	    case DELETE:
 		try {
-		    Long fileid = new Long(request.getParameter("fid"));
-		    Session session = DBManager.getSession();
-		    session.beginTransaction();
-		    Imagem image = Imagem.findById(session,fileid);
-		    image.remove();
-		    targetUrl="message.jsp?msg=0";
+		    String fid_comfirm = request.getParameter("fid");
+		    if (fid_comfirm == null) {
+			targetUrl = "/xCommerce/message.jsp?msg=104";
+		    } else {
+			Long fileid = new Long(fid_comfirm);
+			Session session = DBManager.getSession();
+			session.beginTransaction();
+			Imagem image = Imagem.findById(session,fileid);
+			if (image != null) {
+			    image.remove();
+			    targetUrl="/xCommerce/message.jsp?msg=103";
+			} else {
+			    targetUrl = "/xCommerce/message.jsp?msg=104";
+			}
+		    }
 		} catch (Exception e) {
-		    targetUrl = "message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=104";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
@@ -144,9 +158,8 @@ public class ImagemServlet extends HttpServlet {
 				+"/images/products/"+image.getId()+"\"></td></tr>");
 		    }
 		    out.println("</table>");
-		    
 		} catch (Exception e) {
-		    targetUrl = "message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=105";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
@@ -174,7 +187,7 @@ public class ImagemServlet extends HttpServlet {
 		    out.println("<input type=\"submit\" value=\""+msg.getString("DELETE_IMAGE") +"\"/>");
 		    out.println("</form>");
 		} catch (Exception e) {
-		    targetUrl = "message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=105";
 		    response.sendRedirect(targetUrl);
 		}
 	}

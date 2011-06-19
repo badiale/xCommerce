@@ -9,4 +9,6 @@
 <p><a href="list.jsp?pcode=<%=request.getParameter("pcode")%>">
     <%=msg.getString("LIST_IMAGES")%>
 </a></p>
+<br/>
+<a href="javascript:history.go(-1)"/><%=msg.getString("BACK")%></a>
 <%@include file="/footer.jsp"%>

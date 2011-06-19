@@ -174,18 +174,42 @@ public class Cliente implements Serializable {
 		c.setSenha("123");
 		c.setNascimento(new Date(1989, 5, 11));
 		c.insert();
+
+		log.info("Cliente inserido.");
 	}
 
 	// testa find e update 
 	private static void teste02 () {
+		Cliente c = Cliente.find("ze@email.com");
+		log.info("Cliente buscado.");
+
+		c.setSenha("abc123");
+		c.update();
+		log.info("Cliente atualizado");
 	}
 
 	// testa find all
 	private static void teste03() {
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+
+		Iterator i = Cliente.findAll().iterator();
+		log.info("Exibindo todos: ");
+
+		while (i.hasNext()) {
+			Cliente c = (Cliente) i.next();
+			log.info("Nome: " + c.getNome());
+		}
+
+		log.info("Todos exibidos");
+
+		session.getTransaction().commit();
 	}
 
 	// testa remove
 	private static void teste04() {
+		Cliente.find("ze@email.com").remove();
+		log.info("Cliente removido");
 	}
 
 	/**

@@ -65,24 +65,19 @@ public class Compra implements Serializable {
 	 * Define um codigo para a compra.
 	 * @param codigo novo codigo a compra.
 	 * */
-    private void setCodigo(Integer codigo) { this.codigo = codigo; }
+    public void setCodigo(Integer codigo) { this.codigo = codigo; }
 	
-	/** Retorna um objeto cliente associado a compra
+	/** 
+	 * Retorna um objeto cliente associado a compra
 	 * @return objeto Cliente
 	 **/
-	public Cliente getClient() { return cliente }
+	public Cliente getCliente() { return this.cliente; }
 
-	/**
-	 * Pega o email do cliente.
-	 * @return o email do cliente.
-	 * */
-    public String getClienteEmail() { return this.cliente; }
-
-	/**
-	 * Define um email para o cliente.
-	 * @param novo email do cliente.
-	 * */
-    public void setClienteEmail(String cliente) { this.cliente = cliente; }
+	/** 
+	 * Define um objeto cliente associado a compra
+	 * @param novo cliente para a compra
+	 **/
+	public void setCliente(Cliente cliente) { this.cliente = cliente; } 
 	
 	/**
 	 * Pega a data da compra.
@@ -193,13 +188,13 @@ public class Compra implements Serializable {
 
 		c.insert();
 
-		log.debug("Compra inserido.");
+		log.debug("Compra inserida.");
 	}
 
 	// testa find e remove
 	private static void teste02 () {
 		Compra c = Compra.find(new Integer(1));
-		log.debug("Produto encontrado.");
+		log.debug("Compra encontrada.");
 
 		c.setCliente(Cliente.find("ze@email.com"));
 		c.update();
@@ -218,7 +213,7 @@ public class Compra implements Serializable {
 		Iterator it = l.iterator();
 		while (it.hasNext()) {
 			Compra c = (Compra) it.next();
-			log.info("Email do cliente: " + c.getCliente());
+			log.info("Nome do cliente: " + c.getCliente().getNome());
 		}
 
 		log.debug("Exibiu todas as compras.");

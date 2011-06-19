@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 import org.hibernate.Session;
 import java.util.*;
 
-public class EstoqueServlet extends HttpServlet {
+public class CompraServlet extends HttpServlet {
 
   private final int INSERT = 0;
   private final int REMOVE = 1;
@@ -31,7 +31,7 @@ public class EstoqueServlet extends HttpServlet {
 					case INSERT:
 							c = new Compra();
 							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
-							c.setClienteEmail(request.getParameter("cliente"));
+							c.setCliente(Cliente.find(request.getParameter("email")));
 							c.setHoraCompra(request.getParameter("horaCompra"));
 							try {
 								c.insert();
@@ -42,7 +42,7 @@ public class EstoqueServlet extends HttpServlet {
 					case REMOVE:
 							c = new Compra();
 							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
-							c.setClienteEmail(request.getParameter("cliente"));
+							c.setCliente(Cliente.find(request.getParameter("email")));
 							c.setHoraCompra(request.getParameter("horaCompra"));
 							
 							try {
@@ -54,7 +54,7 @@ public class EstoqueServlet extends HttpServlet {
 					case UPDATE:
 							c = new Compra();
 							c.setCodigo(Integer.parseInt(request.getParameter("codigo")));
-							c.setClienteEmail(request.getParameter("cliente"));
+							c.setCliente(Cliente.find(request.getParameter("email")));
 							c.setHoraCompra(request.getParameter("horaCompra"));
 							
 							try {
@@ -68,6 +68,7 @@ public class EstoqueServlet extends HttpServlet {
 								//TODO NA VIEW
 								c.findAll();
 							} catch (Exception ex) { ex.printStackTrace(); }
+							//TODO mensagem correta
 							//response.sendRedirect("message.jsp?msg=504");
 					}
 

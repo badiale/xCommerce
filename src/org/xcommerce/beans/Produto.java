@@ -48,6 +48,10 @@ public class Produto implements Serializable {
 	@Column
 	private Vector<String> caracteristicasValor;
 	
+	@OneToOne
+	@JoinColumn(name="ecodigo")
+	private Estoque estoque;
+
 	@OneToMany
 	@JoinColumn(name = "prodid")
 	private Set<Imagem> imagens;
@@ -69,7 +73,7 @@ public class Produto implements Serializable {
 		categorias = new Vector<String>();
 		caracteristicas = new Vector<String>();
 		caracteristicasValor = new Vector<String>();
-		imagens = new Set<Imagem>();
+		imagens = new HashSet<Imagem>();
 	}
 
 	/**
@@ -231,8 +235,8 @@ public class Produto implements Serializable {
 		p.getCaracteristicasValor().add("100 g");
 		
 		Imagem i = new Imagem();
-		i.setNome("Nomezim");
-		i.insert();
+		i.setDataCriacao("Nomezim");
+		try { i.insert(); } catch (Exception e) {}
 
 		p.getImagens().add(i);
 
@@ -264,6 +268,12 @@ public class Produto implements Serializable {
 		while (it.hasNext()) {
 			Produto p = (Produto) it.next();
 			log.info("Nome do produto: " + p.getNome());
+
+			Iterator ii = p.getImagens().iterator();
+			while (ii.hasNext()) {
+				Imagem im = (Imagem) ii.next();
+				log.info("Nome da imagem: " + im.getDataCriacao());
+			}
 		}
 
 		log.debug("Exibiu todos os produtos.");

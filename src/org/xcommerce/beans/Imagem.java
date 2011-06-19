@@ -32,12 +32,12 @@ public class Imagem implements Serializable, Config {
     // Constructors
     public Imagem(){
 	id = null;
-	produtoCod = null;
+	produto= null;
 	dataCriacao = null;
     }
-    public Imagem (int produto, String data) {
+    public Imagem (Produto produto, String data) {
 	id = null;
-	setProdutoCod(produto);
+	setProduto(produto);
 	setDataCriacao(data);
     }
     
@@ -99,116 +99,116 @@ public class Imagem implements Serializable, Config {
 	return (Imagem) session.get("org.xcommerce.beans.Imagem", id);
     }
     
-    /**
-     * Unit test for <code>insert()</code>
-     */
-    private static void UnitTest01 () {
-	Imagem imagem = new Imagem();
-	imagem.setProduto(Produto.find(new Integer(1)));
-	imagem.setDataCriacao("2011/06/17 15:35:00");
-	try {
-	    imagem.insert();
-	    System.out.println("Inserted ID: "+imagem.id);
-	} catch (IOException e) {
-	    System.err.println("ERRO:UnitTest01: "+e);
-	    e.printStackTrace();
-	}
-    }
-    /**
-     * Unit test for <code>remove()</code>
-     */
-    private static void UnitTest02 () {
-	Imagem imagem = new Imagem();
-	imagem.setProduto(Produto.find(new Integer(1)));
-	imagem.setDataCriacao("2011/06/17 15:35:00");
-	try {
-	    imagem.insert();
-	    System.out.println("Inserted ID: "+imagem.id);
-	} catch (IOException e) {
-	    System.err.println("ERRO:UnitTest02: "+e);
-	    e.printStackTrace();
-	}
-        imagem.remove();
-        System.out.println("Removed ID: "+imagem.id);
-    }
-    /**
-     * Unit test for <code>findAll()</code>
-     */
-    private static void UnitTest03 () {
-	Imagem imagem1 = new Imagem(1,"2011/06/17 01:35:00");
-	Imagem imagem2 = new Imagem(1,"2011/06/17 02:35:00");
-	Imagem imagem3 = new Imagem(1,"2011/06/17 03:35:00");
-	Imagem imagem4 = new Imagem(1,"2011/06/17 04:35:00");
-	Imagem imagem5 = new Imagem(1,"2011/06/17 05:35:00");
-	try {
-	    imagem1.insert();
-	    imagem2.insert();
-	    imagem3.insert();
-	    imagem4.insert();
-	    imagem5.insert();
-	} catch (IOException e) {
-	    System.err.println("ERRO:UnitTest03: "+e);
-	    e.printStackTrace();
-	}
-	Session session = DBManager.getSession();
-	session.beginTransaction();
-	List imagens = Imagem.findAll(session);
-	Iterator iterator = imagens.iterator();
-	while(iterator.hasNext()) {
-	    Imagem image = (Imagem) iterator.next();
-	    System.out.print(image.getId()+" ");
-	}
-    }
-    /**
-     * Unit test for <code>findById()</code>
-     */
-    private static void UnitTest04 () {
-	Imagem imagem1 = new Imagem(1,"2011/06/17 01:35:00");
-	try {
-	    imagem1.insert();
-	} catch (IOException e) {
-	    System.err.println("ERRO:UnitTest04: "+e);
-	    e.printStackTrace();
-	}
-	Session session = DBManager.getSession();
-	session.beginTransaction();
-	Imagem image = Imagem.findById(session,new Long(1));
-	System.out.print(image.getId()+" "+image.getProduto().getId()+" "+image.getDataCriacao());
-    }
-    /**
-     * Unit test for <code>findByProduto()</code>
-     */
-    private static void UnitTest05 () {
-	Imagem imagem1 = new Imagem(1,"2011/06/17 01:35:00");
-	Imagem imagem2 = new Imagem(1,"2011/06/17 02:35:00");
-	Imagem imagem3 = new Imagem(1,"2011/06/17 03:35:00");
-	Imagem imagem4 = new Imagem(2,"2011/06/17 04:35:00");
-	Imagem imagem5 = new Imagem(2,"2011/06/17 05:35:00");
-	try {
-	    imagem1.insert();
-	    imagem2.insert();
-	    imagem3.insert();
-	    imagem4.insert();
-	    imagem5.insert();
-	} catch (IOException e) {
-	    System.err.println("ERRO:UnitTest05: "+e);
-	    e.printStackTrace();
-	}
-	Session session = DBManager.getSession();
-	session.beginTransaction();
-	List imagens = Imagem.findByProduto(session,2);
-	Iterator iterator = imagens.iterator();
-	while(iterator.hasNext()) {
-	    Imagem image = (Imagem) iterator.next();
-	    System.out.print(image.getId()+" ");
-	}
-    }
-    
-    public static void main (String args[]) {
-	//UnitTest01(); // insert()
-	//UnitTest02(); // remove()
-	//UnitTest03(); // findAll()
-	//UnitTest04(); // findById()
-	//UnitTest05(); // findByProduto()
-    }
+//    /**
+//     * Unit test for <code>insert()</code>
+//     */
+//    private static void UnitTest01 () {
+//	Imagem imagem = new Imagem();
+//	imagem.setProduto(Produto.find(new Integer(1)));
+//	imagem.setDataCriacao("2011/06/17 15:35:00");
+//	try {
+//	    imagem.insert();
+//	    System.out.println("Inserted ID: "+imagem.id);
+//	} catch (IOException e) {
+//	    System.err.println("ERRO:UnitTest01: "+e);
+//	    e.printStackTrace();
+//	}
+//    }
+//    /**
+//     * Unit test for <code>remove()</code>
+//     */
+//    private static void UnitTest02 () {
+//	Imagem imagem = new Imagem();
+//	imagem.setProduto(Produto.find(new Integer(1)));
+//	imagem.setDataCriacao("2011/06/17 15:35:00");
+//	try {
+//	    imagem.insert();
+//	    System.out.println("Inserted ID: "+imagem.id);
+//	} catch (IOException e) {
+//	    System.err.println("ERRO:UnitTest02: "+e);
+//	    e.printStackTrace();
+//	}
+//        imagem.remove();
+//        System.out.println("Removed ID: "+imagem.id);
+//    }
+//    /**
+//     * Unit test for <code>findAll()</code>
+//     */
+//    private static void UnitTest03 () {
+//	Imagem imagem1 = new Imagem(1,"2011/06/17 01:35:00");
+//	Imagem imagem2 = new Imagem(1,"2011/06/17 02:35:00");
+//	Imagem imagem3 = new Imagem(1,"2011/06/17 03:35:00");
+//	Imagem imagem4 = new Imagem(1,"2011/06/17 04:35:00");
+//	Imagem imagem5 = new Imagem(1,"2011/06/17 05:35:00");
+//	try {
+//	    imagem1.insert();
+//	    imagem2.insert();
+//	    imagem3.insert();
+//	    imagem4.insert();
+//	    imagem5.insert();
+//	} catch (IOException e) {
+//	    System.err.println("ERRO:UnitTest03: "+e);
+//	    e.printStackTrace();
+//	}
+//	Session session = DBManager.getSession();
+//	session.beginTransaction();
+//	List imagens = Imagem.findAll(session);
+//	Iterator iterator = imagens.iterator();
+//	while(iterator.hasNext()) {
+//	    Imagem image = (Imagem) iterator.next();
+//	    System.out.print(image.getId()+" ");
+//	}
+//    }
+//    /**
+//     * Unit test for <code>findById()</code>
+//     */
+//    private static void UnitTest04 () {
+//	Imagem imagem1 = new Imagem(1,"2011/06/17 01:35:00");
+//	try {
+//	    imagem1.insert();
+//	} catch (IOException e) {
+//	    System.err.println("ERRO:UnitTest04: "+e);
+//	    e.printStackTrace();
+//	}
+//	Session session = DBManager.getSession();
+//	session.beginTransaction();
+//	Imagem image = Imagem.findById(session,new Long(1));
+//	System.out.print(image.getId()+" "+image.getProduto().getCodigo()+" "+image.getDataCriacao());
+//    }
+//    /**
+//     * Unit test for <code>findByProduto()</code>
+//     */
+//    private static void UnitTest05 () {
+//	Imagem imagem1 = new Imagem(1,"2011/06/17 01:35:00");
+//	Imagem imagem2 = new Imagem(1,"2011/06/17 02:35:00");
+//	Imagem imagem3 = new Imagem(1,"2011/06/17 03:35:00");
+//	Imagem imagem4 = new Imagem(2,"2011/06/17 04:35:00");
+//	Imagem imagem5 = new Imagem(2,"2011/06/17 05:35:00");
+//	try {
+//	    imagem1.insert();
+//	    imagem2.insert();
+//	    imagem3.insert();
+//	    imagem4.insert();
+//	    imagem5.insert();
+//	} catch (IOException e) {
+//	    System.err.println("ERRO:UnitTest05: "+e);
+//	    e.printStackTrace();
+//	}
+//	Session session = DBManager.getSession();
+//	session.beginTransaction();
+//	List imagens = Imagem.findByProduto(session,2);
+//	Iterator iterator = imagens.iterator();
+//	while(iterator.hasNext()) {
+//	    Imagem image = (Imagem) iterator.next();
+//	    System.out.print(image.getId()+" ");
+//	}
+//    }
+//    
+//    public static void main (String args[]) {
+//	//UnitTest01(); // insert()
+//	//UnitTest02(); // remove()
+//	//UnitTest03(); // findAll()
+//	//UnitTest04(); // findById()
+//	//UnitTest05(); // findByProduto()
+//    }
 }

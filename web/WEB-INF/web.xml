@@ -37,6 +37,14 @@
 	</servlet-mapping>
 
     <servlet>
+        <servlet-name>clienteservlet</servlet-name>
+        <servlet-class>org.xcommerce.servlets.ClienteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>clienteservlet</servlet-name>
+        <url-pattern>/cliente/clienteservlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>EstoqueServlet</servlet-name>
         <servlet-class>org.xcommerce.servlets.EstoqueServlet</servlet-class>
     </servlet>

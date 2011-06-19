@@ -164,6 +164,22 @@ public class Cliente implements Serializable {
 	}
 	
 	/**
+	 * Encontra um usuario e valida o par senha/email.
+	 * */
+	public static Cliente findValidate(String email, String senha) {
+		Cliente c = new Cliente();
+
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		session.load(c, email);
+		session.getTransaction().commit();
+		if (c != null && c.getSenha().equals(senha)) {
+		    return c;
+		}
+	        return null;
+	}
+	
+	/**
 	 * Retorna todos os clientes.<BR>
 	 * <b>Este comando tem que ocorrer dentro de uma transacao.</b>
 	 * @return lista com todos os clientes.
@@ -231,14 +247,29 @@ public class Cliente implements Serializable {
 		//Cliente.find("ze@email.com").remove();
 		log.info("Cliente removido");
 	}
+	
+	private static void teste05 () {
+		Cliente c = new Cliente();
+		c.setNome("Jose");
+		c.setEmail("ze");
+		c.setSenha("123");
+		c.setNascimento(new Date(1989, 5, 11));
+		c.insert();
+		log.info("Cliente inserido.");
+		
+		Cliente c2 = Cliente.findValidate("ze","123");
+		log.debug(c2.getNome()+" "+c2.getEmail());
+		log.info("Cliente inserido.");
+	}
 
 	/**
 	 * Main para executar os testes de unidade.
 	 * */
 	public static void main (String args[]) {
-		teste01();
-		teste02();
-		teste03();
-		teste04();
+		//teste01();
+		//teste02();
+		//teste03();
+		//teste04();
+		teste05();
 	}
 }

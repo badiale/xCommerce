@@ -40,7 +40,7 @@ public class Cliente implements Serializable {
 	private Date dataCadastro;
 	
 	@OneToMany
-	@JoinColumn
+	@JoinColumn(name = "clienteemail")
 	private Set<Compra> compras;
 
 	/**

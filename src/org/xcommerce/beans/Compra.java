@@ -28,7 +28,7 @@ public class Compra implements Serializable {
     private Integer codigo;
 
     @ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "clienteemail")
     private Cliente cliente;
 	
 	@Column

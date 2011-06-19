@@ -55,11 +55,9 @@ public class EstoqueServlet extends HttpServlet {
 					case REMOVE:
 							targetUrl = "/xCommerce/message.jsp?msg=504";
 							try {
-							Session session = DBManager.getSession();
-
-		   					session.beginTransaction();
+		   				
 								e = Estoque.find(Integer.parseInt(request.getParameter("codigo")));
-								session.getTransaction().commit();
+
 								e.remove();
 							} catch (Exception ex) { ex.printStackTrace();
 								targetUrl = "/xCommerce/message.jsp?msg=503";
@@ -85,11 +83,10 @@ public class EstoqueServlet extends HttpServlet {
 					case SHOW:
 							
 							try {
-							Session session = DBManager.getSession();
 
-		   					session.beginTransaction();
 								e = Estoque.find(Integer.parseInt(request.getParameter("pcode")));
-								session.getTransaction().commit();
+
+
 								out.println("<table>");
 								out.println("<tr class=\"labelRow\"><th>COD</th><th>"+msg.getString("ESTOQUE_PRECO")+"</th> <th>"+msg.getString("ESTOQUE_QUANTIDADE")+"</th><th>"+msg.getString("ESTOQUE_FORNECEDOR")+"</th></tr>");
 								out.println("<tr class=\"labelRow\"><td class=\"idCell\">"+e.getCodigo()+"</td>");

@@ -16,6 +16,7 @@ import java.util.*;
  * Estoque
  * @author Gabriel Perri Gimenes
  * */
+ 
 @Entity
 public class Estoque implements Serializable {
 
@@ -155,10 +156,10 @@ public class Estoque implements Serializable {
 	private static void teste01 () {
 		Estoque e = new Estoque();
 	
-		e.setCodigo();
-		e.setPreco();
-		e.setQuantidade();
-		e.setFornecedor();
+		e.setCodigo(1);
+		e.setPreco(new Float(10));
+		e.setQuantidade(1);
+		e.setFornecedor("provider");
 	
 		e.insert();
 
@@ -167,11 +168,11 @@ public class Estoque implements Serializable {
 
 	// testa find e update
 	private static void teste02 () {
-		Estoque e = Estoque.find();
+		Estoque e = Estoque.find(1);
 		log.debug("Estoque encontrado.");
 
-		p.setPreco();
-		p.update();
+		e.setPreco(new Float(10));
+		e.update();
 
 		log.debug("Estoque atualizado.");
 	}
@@ -198,7 +199,7 @@ public class Estoque implements Serializable {
 
 	// testa remove
 	private static void teste04() {
-		Estoque e = Estoque.find();
+		Estoque e = Estoque.find(1);
 		log.debug("Pegou o estoque");
 
 		e.remove();

@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 
 // Para Hibernate
 import org.hibernate.Session;
-import util.*;
+import java.util.*;
 
 public class EstoqueServlet extends HttpServlet {
 

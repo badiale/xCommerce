@@ -144,7 +144,7 @@ public class Compra implements Serializable {
 	 * @param email Filtro.
 	 * @return lista com todas as compras de um dado cliente.
 	 * */
-	public static List find(String email) {
+	public static List find(String email) {  //TODO FIX consulta
 		Session session = DBManager.getSession();
 		return session.createQuery(
 				"select c from Compra c where c.cliente = :cliente"

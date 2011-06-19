@@ -14,6 +14,7 @@
 	case 104: out.println("error_msg\">"+msg.getString("DELETE_IMAGE_ERROR")); break;
 	case 105: out.println("error_msg\">"+msg.getString("LIST_IMAGE_ERROR")); break;
 	case 106: out.println("error_msg\">"+msg.getString("IMAGE_NOT_SUPPORTED")); break;
+
 	// Erro inesperado
 	default: out.println("error_msg\">"+msg.getString("UNEXPECTED_ERROR")); break;
     }

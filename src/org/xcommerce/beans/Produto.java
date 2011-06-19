@@ -48,9 +48,16 @@ public class Produto implements Serializable {
 	@Column
 	private Vector<String> caracteristicasValor;
 	
+<<<<<<< HEAD
+	@OneToOne
+	@JoinColumn(name="codigo")
+  private Estoque estoque;
+
+=======
 	@OneToMany
 	@JoinColumn(name = "prodid")
 	private Set<Imagem> imagens;
+>>>>>>> dd3537bef200ac5b238b76edff8de1632b779b97
 	
 	/**
 	 * Logger que sera usado para esta classe.

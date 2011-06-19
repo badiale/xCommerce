@@ -33,6 +33,10 @@ public class Estoque implements Serializable {
     @Column
     private String fornecedor;
     
+    @OneToOne(mappedBy="estoque")
+    private Produto produto;
+
+    
 	/**
 	 * Logger que sera usado para esta classe.
 	 * */

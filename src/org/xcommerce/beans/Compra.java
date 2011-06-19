@@ -32,7 +32,7 @@ public class Compra implements Serializable {
     private Cliente cliente;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "lcompraid")
+	@JoinColumn(name = "compracod")
 	private Set<LinhaDeCompra> linhasCompra;
 
 	@Column
@@ -48,10 +48,10 @@ public class Compra implements Serializable {
 	 * Hibernate obriga a criacao de um Pojo.
 	 * */
     public Compra() {
-		linhasCompra = new HashSet<LinhaDeCompra>();
-		codigo = null;
-		cliente = null;
-		horaCompra = null;
+		this.linhasCompra = new HashSet<LinhaDeCompra>();
+		this.codigo = null;
+		this.cliente = null;
+		this.horaCompra = null;
 	}
 
 	/*public Compra(int codigo, Cliente cliente, String horaCompra) {
@@ -240,7 +240,7 @@ public class Compra implements Serializable {
 		Iterator it = l.iterator();
 		while (it.hasNext()) {
 			Compra c = (Compra) it.next();
-			log.info("Nome do cliente: " + c.getCliente().getNome());
+			log.info("Nome do cliente: " + c.getCliente().getEmail());
 		}
 
 		log.debug("Exibiu todas as compras.");
@@ -248,12 +248,31 @@ public class Compra implements Serializable {
 		session.getTransaction().commit();
 	}
 
+	private static void teste04() {
+		Compra c = new Compra();
+		c = Compra.find(new Integer(1));
+
+		LinhaDeCompra lc = new LinhaDeCompra();
+		//lc.setCompra(c);
+		lc.setQuantidade(new Integer(13));
+		lc.setPrecoUnitario(new Float(45.00));
+		try { lc.insert(); } 
+		catch (Exception e ) { }
+
+		c.getLinhasCompra().add(lc);
+		c.insert();
+
+		log.info("Compra encontrada hora: " + c.getHoraCompra());
+		log.info("Nome do usuario da compra: " + c.getCliente().getEmail());
+	}
+
 	/**
 	 * Main para executar os testes de unidade.
 	 * */
 	public static void main (String args[]) {
 		Compra.teste01();
-		Compra.teste02();
-		Compra.teste03();
+		//Compra.teste02();
+		//Compra.teste03();
+		Compra.teste04();
 	}
 }

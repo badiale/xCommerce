@@ -96,7 +96,7 @@ public class LinhaDeCompraServlet extends HttpServlet {
 
 	case LIST:
 			try {
-				//TODO NA VIEW
+				
 				lc.findAll();
 			} catch (Exception ex) { ex.printStackTrace(); }
 			//TODO mensagem correta
@@ -112,6 +112,4 @@ public class LinhaDeCompraServlet extends HttpServlet {
   }
 
 }
-
-
 

@@ -18,6 +18,24 @@
         <url-pattern>/produto/produto</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+        <servlet-name>compra</servlet-name>
+        <servlet-class>org.xcommerce.servlets.CompraServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>compra</servlet-name>
+        <url-pattern>/compra/CompraServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+        <servlet-name>linhadecompra</servlet-name>
+        <servlet-class>org.xcommerce.servlets.LinhaDeCompraServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>linhadecompra</servlet-name>
+        <url-pattern>/linhadecompra/LinhaDeCompraServlet</url-pattern>
+	</servlet-mapping>
+
     <servlet>
         <servlet-name>EstoqueServlet</servlet-name>
         <servlet-class>org.xcommerce.servlets.EstoqueServlet</servlet-class>

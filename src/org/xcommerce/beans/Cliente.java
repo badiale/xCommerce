@@ -164,6 +164,23 @@ public class Cliente implements Serializable {
 	}
 	
 	/**
+	 * Encontra um usuario e valida o par senha/email.
+	 * */
+	public static Cliente findValidate(String email, String senha) {
+		Cliente c = null;
+
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		String hql = "from Cliente as client where client.email="+email
+			+"and client.senha="+senha;
+		org.hibernate.Query query = session.createQuery(hql);
+		c = (Cliente) query.uniqueResult();
+		session.getTransaction().commit();
+		
+	        return c;
+	}
+	
+	/**
 	 * Retorna todos os clientes.<BR>
 	 * <b>Este comando tem que ocorrer dentro de uma transacao.</b>
 	 * @return lista com todos os clientes.

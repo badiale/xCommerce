@@ -47,6 +47,10 @@ public class Produto implements Serializable {
 	
 	@Column
 	private Vector<String> caracteristicasValor;
+	
+	@OneToOne
+	@JoinColumn(name="codigo")
+  private Estoque estoque;
 
 	
 	/**

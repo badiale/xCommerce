@@ -18,6 +18,8 @@
 	// Operações de Estoque
 	case 501: out.println("error_msg\">"+msg.getString("ESTOQUE_INSERT_ERROR")); break;
 	case 502: out.println("success_msg\">"+msg.getString("ESTOQUE_INSERT_SUCCESS")); break;
+	case 503: out.println("error_msg\">"+msg.getString("ESTOQUE_REMOVE_ERROR")); break;
+	case 504: out.println("success_msg\">"+msg.getString("ESTOQUE_REMOVE_SUCCESS")); break;
 	
 	// Erro inesperado
 	default: out.println("error_msg\">"+msg.getString("UNEXPECTED_ERROR")); break;

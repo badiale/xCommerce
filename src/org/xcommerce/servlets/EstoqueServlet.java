@@ -85,8 +85,10 @@ public class EstoqueServlet extends HttpServlet {
 							try {
 
 								e = Estoque.find(Integer.parseInt(request.getParameter("pcode")));
-
-
+								if (e == null) { 
+									targetUrl = "/xCommerce/message.jsp?msg=501";
+									response.sendRedirect(targetUrl);
+								}
 								out.println("<table>");
 								out.println("<tr class=\"labelRow\"><th>COD</th><th>"+msg.getString("ESTOQUE_PRECO")+"</th> <th>"+msg.getString("ESTOQUE_QUANTIDADE")+"</th><th>"+msg.getString("ESTOQUE_FORNECEDOR")+"</th></tr>");
 								out.println("<tr class=\"labelRow\"><td class=\"idCell\">"+e.getCodigo()+"</td>");
@@ -98,7 +100,6 @@ public class EstoqueServlet extends HttpServlet {
 								targetUrl = "/xCommerce/message.jsp?msg=507";
 								response.sendRedirect(targetUrl);
 							}
-								 
 							break;
 							
 					case LIST:

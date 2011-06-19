@@ -21,7 +21,7 @@ import java.util.*;
 public class Estoque implements Serializable {
 
     @Id
-    @Column
+    @Column(name = "ecodigo")
     private Integer codigo;
     
     @Column

@@ -2,6 +2,8 @@ package org.xcommerce.servlets;
 
 import org.xcommerce.beans.*;
 
+import org.xcommerce.db.DBManager;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -67,6 +69,8 @@ public class EstoqueServlet extends HttpServlet {
 							break;
 					case LIST:
 							try {
+								Session session = DBManager.getSession();
+		   					session.beginTransaction();
 								List l = Estoque.findAll();
 		
 								Iterator it = l.iterator();

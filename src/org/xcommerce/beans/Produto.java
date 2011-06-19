@@ -324,6 +324,6 @@ public class Produto implements Serializable {
 		Produto.teste02();
 		Produto.teste03();
 		Produto.teste04();
-		Produto.teste05();
+		//Produto.teste05();
 	}
 }

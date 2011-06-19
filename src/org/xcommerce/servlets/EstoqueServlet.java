@@ -39,8 +39,8 @@ public class EstoqueServlet extends HttpServlet {
 							
 							try {
 								e.insert();
-							} catch (Exception ex) { ex.printStackTrace(); }
-							response.sendRedirect("message.jsp?msg=501");
+							} catch (Exception ex) { ex.printStackTrace(); response.sendRedirect("/xCommerce/message.jsp?msg=501"); }
+							response.sendRedirect("/xCommerce/message.jsp?msg=502");
 							break;
 
 					case REMOVE:
@@ -53,7 +53,7 @@ public class EstoqueServlet extends HttpServlet {
 							try {
 								e.remove();
 							} catch (Exception ex) { ex.printStackTrace(); }
-							response.sendRedirect("message.jsp?msg=502");
+							response.sendRedirect("/xCommerce/message.jsp?msg=502");
 							break;
 					case UPDATE:
 							e = new Estoque();
@@ -65,8 +65,9 @@ public class EstoqueServlet extends HttpServlet {
 							try {
 								e.update();
 							} catch (Exception ex) { ex.printStackTrace(); }
-							response.sendRedirect("message.jsp?msg=503");
+							response.sendRedirect("/xCommerce/message.jsp?msg=503");
 							break;
+							
 					case LIST:
 							try {
 								Session session = DBManager.getSession();

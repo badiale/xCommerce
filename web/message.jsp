@@ -15,6 +15,10 @@
 	case 105: out.println("error_msg\">"+msg.getString("LIST_IMAGE_ERROR")); break;
 	case 106: out.println("error_msg\">"+msg.getString("IMAGE_NOT_SUPPORTED")); break;
 
+	// Operações de Estoque
+	case 501: out.println("error_msg\">"+msg.getString("ESTOQUE_INSERT_ERROR")); break;
+	case 502: out.println("success_msg\">"+msg.getString("ESTOQUE_INSERT_SUCCESS")); break;
+	
 	// Erro inesperado
 	default: out.println("error_msg\">"+msg.getString("UNEXPECTED_ERROR")); break;
     }

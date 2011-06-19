@@ -70,7 +70,7 @@ public class EstoqueServlet extends HttpServlet {
 					case LIST:
 							try {
 								Session session = DBManager.getSession();
-<<<<<<< HEAD
+
 		   					session.beginTransaction();
 								List l = Estoque.findAll();
 								session.getTransaction().commit();
@@ -87,20 +87,7 @@ public class EstoqueServlet extends HttpServlet {
 									out.println(e.getFornecedor());
 								}
 								
-=======
-								session.beginTransaction();
-//								List l = Estoque.findAll();
-//									
-//								Iterator it = l.iterator();
-//								while (it.hasNext()) {
-//									e = (Estoque) it.next();
-//									out.println(e.getCodigo());
-//									out.println(e.getPreco());
-//									out.println(e.getQuantidade());
-//									out.println(e.getFornecedor());
-//									out.println("OI");
-//								}
->>>>>>> a160def8a628476972c1d708ffafe327460c5619
+
 							} catch (Exception ex) { ex.printStackTrace(); }
 								
 					}

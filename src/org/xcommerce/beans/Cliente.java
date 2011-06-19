@@ -144,7 +144,7 @@ public class Cliente implements Serializable {
 	/**
 	 * Encontra um usuario dado seu email.
 	 * */
-	public static Produto find(String email) {
+	public static Cliente find(String email) {
 		Cliente c = new Cliente();
 
 		Session session = DBManager.getSession();
@@ -172,7 +172,7 @@ public class Cliente implements Serializable {
 		c.setNome("Jose");
 		c.setEmail("ze@email.com");
 		c.setSenha("123");
-		c.setNascimento(1989, 5, 11);
+		c.setNascimento(new Date(1989, 5, 11));
 		c.insert();
 	}
 
@@ -192,9 +192,9 @@ public class Cliente implements Serializable {
 	 * Main para executar os testes de unidade.
 	 * */
 	public static void main (String args[]) {
-		Produto.teste01();
-		Produto.teste02();
-		Produto.teste03();
-		Produto.teste04();
+		teste01();
+		teste02();
+		teste03();
+		teste04();
 	}
 }

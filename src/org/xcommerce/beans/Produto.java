@@ -149,6 +149,7 @@ public class Produto implements Serializable {
 	 * @return conjunto de fotos do produto.
 	 * */
 	public Set<Imagem> getImagens() { return this.imagens; }
+	public void setImagens(Set<Imagem> set) { this.imagens = set; }
 	
 	/**
 	 * Pega o estoque associado ao produto.

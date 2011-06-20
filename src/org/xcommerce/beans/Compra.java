@@ -102,6 +102,7 @@ public class Compra implements Serializable {
 	 * */
 	public Set<LinhaDeCompra> getLinhasCompra() { return this.linhasCompra; }
 
+	public void setLinhasCompra(Set set) { this.linhasCompra = set; }
 	// metodos dos beans
 
 	/**
@@ -251,6 +252,7 @@ public class Compra implements Serializable {
 	private static void teste04() {
 		Compra c = new Compra();
 		c = Compra.find(new Integer(1));
+		c.setLinhasCompra(new HashSet<LinhaDeCompra>());
 
 		LinhaDeCompra lc = new LinhaDeCompra();
 		//lc.setCompra(c);
@@ -271,8 +273,8 @@ public class Compra implements Serializable {
 	 * */
 	public static void main (String args[]) {
 		Compra.teste01();
-		//Compra.teste02();
-		//Compra.teste03();
+		Compra.teste02();
+		Compra.teste03();
 		Compra.teste04();
 	}
 }

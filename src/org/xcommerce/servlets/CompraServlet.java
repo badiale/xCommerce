@@ -78,26 +78,27 @@ public class CompraServlet extends HttpServlet {
 			//Session session = DBManager.getSession();
 
 			//session.beginTransaction();
-					
+			
+			//c.setLinhasCompra(new HashSet<LinhaDeCompra>());		
 			c = Compra.find(Integer.parseInt(request.getParameter("ccode")));
 			//session.getTransaction().commit();			
-			Set linhasCompra = c.getLinhasCompra();		
-		
+			Set linhasCompra = c.getLinhasCompra();							
+
 			Iterator it = linhasCompra.iterator();
 			
 			html += "<table>";
 			html += "<tr class=\"labelRow\"><th>COD</th><th>"+msg.getString("COMPRA_PRODUTO_NOME")+"</th> <th>"+msg.getString("COMPRA_PRODUTO_PRECO")+"</th><th>"+msg.getString("COMPRA_QUANTIDADE")+"</th></tr>";
-			/*while (it.hasNext()) {
+			while (it.hasNext()) {
 				LinhaDeCompra lc = (LinhaDeCompra) it.next();
 				html += "<tr class=\"labelRow\"><td class=\"idCell\">"+lc.getCodigo()+"</td>";
 				html += "<tr class=\"labelRow\"><td class=\"idCell\">"+lc.getProduto().getNome()+"</td>";
 				html += "<tr class=\"labelRow\"><td class=\"idCell\">"+lc.getQuantidade()+"</td>";
 				html += "<tr class=\"labelRow\"><td class=\"idCell\">"+lc.getPrecoUnitario()+"</td>";
-			}*/
+			}
 			
 			html += "</table><br><br>";
 			html += "UUUUUUUUUU>>>>> " + c.getCliente().getEmail();
-			//html += msg.getString("COMPRA_TOTAL") + c.total();
+			html += msg.getString("COMPRA_TOTAL") + c.total();
 		
 			out.println(html);
 

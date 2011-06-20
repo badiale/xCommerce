@@ -23,6 +23,8 @@ public class ClienteServlet extends HttpServlet {
     private final int LOGIN	    = 2;
     private final int LOGOUT	    = 3;
     private final int LOGINBOX	    = 4;
+    private final int UNREGISTER    = 5;
+    private final int MODIFY	    = 6;
     
     public void doGet (HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
@@ -71,13 +73,26 @@ public class ClienteServlet extends HttpServlet {
 		    response.sendRedirect(targetUrl);
 		}
 		break;
+	    case UNREGISTER:
+		try {
+		    client = (Cliente) session.getAttribute("cliente");
+		    if ((client != null) &&
+	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())!=null)) {
+		        client.remove();
+			targetUrl = "/xCommerce/index.jsp";
+		    }
+		} catch (Exception e) {
+		    targetUrl = "/xCommerce/message.jsp?msg=0";
+		    response.sendRedirect(targetUrl);
+		}
+		break;
 	    case LOGIN:
 		String mail = request.getParameter("email");
 		String pass = request.getParameter("senha");
 		client = Cliente.findValidate(mail,pass);
 		if (client != null) {
 		    session.setAttribute("cliente",client);
-		    targetUrl = "index.jsp?email="+client.getEmail();
+		    targetUrl = "/xCommerce/cliente";
 		} else {
 		    targetUrl = "/xCommerce/message.jsp?msg=0";
 		}
@@ -116,8 +131,23 @@ public class ClienteServlet extends HttpServlet {
 				"value=\""+msg.getString("LOGOUT")+"\">");
 			out.println("</form>");
 		    }
-		    if (targetUrl != null) {
-			response.sendRedirect(targetUrl);
+		} catch (Exception e) {
+		    targetUrl = "/xCommerce/message.jsp?msg=0";
+		    response.sendRedirect(targetUrl);
+		}
+		break;
+	    case MODIFY:
+		try {
+		    client = (Cliente) session.getAttribute("cliente");
+		    if ((client != null) &&
+	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())!=null)) {
+			client.setNome(request.getParameter("nome"));
+			client.setSenha(request.getParameter("senha"));
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
+			Date nascimento = format.parse(request.getParameter("nasc"));  
+			client.setNascimento(nascimento);
+			client.update();
+			targetUrl = "/xCommerce/cliente";
 		    }
 		} catch (Exception e) {
 		    targetUrl = "/xCommerce/message.jsp?msg=0";

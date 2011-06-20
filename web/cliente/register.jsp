@@ -11,4 +11,6 @@
     </table>
     <input id="submitLogin" type="submit" value="<%=msg.getString("SUBMIT")%>">
 </form>
+<br/>
+<a href="javascript:history.go(-1)"/><%=msg.getString("BACK")%></a>
 <%@include file="/footer.jsp"%>

@@ -37,7 +37,7 @@ public class ClienteServlet extends HttpServlet {
 	try {
 	     operation = Integer.parseInt(request.getParameter("op"));
 	} catch (Exception e) {
-	    targetUrl = "/xCommerce/message.jsp?msg=0";
+	    targetUrl = "/xCommerce/message.jsp?msg=404";
 	    response.sendRedirect(targetUrl);
 	}
 	Cliente client = null;
@@ -53,7 +53,7 @@ public class ClienteServlet extends HttpServlet {
 			response.sendRedirect(targetUrl);
 		    }
 		} catch (Exception e) {
-		    targetUrl = "/xCommerce/message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=200";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
@@ -63,13 +63,14 @@ public class ClienteServlet extends HttpServlet {
 		    client.setNome(request.getParameter("nome"));
 		    client.setEmail(request.getParameter("email"));
 		    client.setSenha(request.getParameter("senha"));
-		    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
-		    Date nascimento = format.parse(request.getParameter("nasc"));  
+		    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		    Date nascimento = format.parse(request.getParameter("nasc"));
 		    client.setNascimento(nascimento);
 		    client.insert();
-		    targetUrl = "/xCommerce/message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=201";
+		    response.sendRedirect(targetUrl);
 		} catch (Exception e) {
-		    targetUrl = "/xCommerce/message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=202";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
@@ -78,28 +79,37 @@ public class ClienteServlet extends HttpServlet {
 		    client = (Cliente) session.getAttribute("cliente");
 		    if ((client != null) &&
 	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())!=null)) {
-		        client.remove();
+		        session.invalidate();
+			client.remove();
 			targetUrl = "/xCommerce/index.jsp";
+			response.sendRedirect(targetUrl);
 		    }
+		} catch (Exception e) {
+		    targetUrl = "/xCommerce/message.jsp?msg=203";
+		    response.sendRedirect(targetUrl);
+		}
+		break;
+	    case LOGIN:
+		try {
+		    String mail = request.getParameter("email");
+		    String pass = request.getParameter("senha");
+		    client = Cliente.findValidate(mail,pass);
+		    if (client != null) {
+			session.setAttribute("cliente",client);
+			targetUrl = "/xCommerce/cliente";
+		    } else {
+			targetUrl = "/xCommerce/message.jsp?msg=0";
+		    }
+		    response.sendRedirect(targetUrl);
 		} catch (Exception e) {
 		    targetUrl = "/xCommerce/message.jsp?msg=0";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
-	    case LOGIN:
-		String mail = request.getParameter("email");
-		String pass = request.getParameter("senha");
-		client = Cliente.findValidate(mail,pass);
-		if (client != null) {
-		    session.setAttribute("cliente",client);
-		    targetUrl = "/xCommerce/cliente";
-		} else {
-		    targetUrl = "/xCommerce/message.jsp?msg=0";
-		}
-		break;
 	    case LOGOUT:
 		session.invalidate();
 		targetUrl = "/xCommerce/index.jsp";
+		response.sendRedirect(targetUrl);
 		break;
 	    case LOGINBOX:
 		try {
@@ -108,7 +118,7 @@ public class ClienteServlet extends HttpServlet {
 		    client = (Cliente) session.getAttribute("cliente");
 		    if (client == null || ((client != null) &&
 	    		    (Cliente.findValidate(client.getEmail(),client.getSenha())==null))) {
-			out.println("<form action=\"/xCommerce/cliente/clienteservlet\" method=\"get\">");
+			out.println("<form action=\"/xCommerce/cliente/clienteservlet\" method=\"post\">");
 			out.println("<input type=\"hidden\" name=\"op\" value=\"2\"/>");
 			out.println("<table>");
 			out.println("<tr><td>"+msg.getString("EMAIL")+":</td>"+
@@ -127,12 +137,13 @@ public class ClienteServlet extends HttpServlet {
 			out.println(msg.getString("GREETING")+" "+client.getNome()+"!<br/>");
 			out.println("<form action=\"clienteservlet\" method=\"get\">");
 			out.println("<input type=\"hidden\" name=\"op\" value=\"3\"/>");
+			out.println("<a href=\"/xCommerce/cliente\">Home</a>");
 			out.println("<input id=\"submitLogin\" type=\"submit\""+
 				"value=\""+msg.getString("LOGOUT")+"\">");
 			out.println("</form>");
 		    }
 		} catch (Exception e) {
-		    targetUrl = "/xCommerce/message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=404";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
@@ -148,9 +159,12 @@ public class ClienteServlet extends HttpServlet {
 			client.setNascimento(nascimento);
 			client.update();
 			targetUrl = "/xCommerce/cliente";
+		    } else {
+			targetUrl = "/xCommerce/index.jsp";
 		    }
+		    response.sendRedirect(targetUrl);
 		} catch (Exception e) {
-		    targetUrl = "/xCommerce/message.jsp?msg=0";
+		    targetUrl = "/xCommerce/message.jsp?msg=204";
 		    response.sendRedirect(targetUrl);
 		}
 		break;
@@ -160,4 +174,9 @@ public class ClienteServlet extends HttpServlet {
 		break;
 	}
     }
+    public void doPost (HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	doGet(request,response);
+    }
+
 }

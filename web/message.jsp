@@ -14,7 +14,12 @@
 	case 104: out.println("error_msg\">"+msg.getString("DELETE_IMAGE_ERROR")); break;
 	case 105: out.println("error_msg\">"+msg.getString("LIST_IMAGE_ERROR")); break;
 	case 106: out.println("error_msg\">"+msg.getString("IMAGE_NOT_SUPPORTED")); break;
-
+	// Operacoes de Cliente
+	case 200: out.println("error_msg\">"+msg.getString("CLIENT_COMFIRM_ERROR")); break;
+	case 201: out.println("success_msg\">"+msg.getString("CLIENT_REGISTER_SUCCESS")); break;
+	case 202: out.println("error_msg\">"+msg.getString("CLIENT_REGISTER_ERROR")); break;
+	case 203: out.println("error_msg\">"+msg.getString("CLIENT_UNREGISTER_ERROR")); break;
+	case 204: out.println("error_msg\">"+msg.getString("CLIENT_MODIFY_ERROR")); break;
 	// Operações de Estoque
 	case 501: out.println("error_msg\">"+msg.getString("ESTOQUE_INSERT_ERROR")); break;
 	case 502: out.println("success_msg\">"+msg.getString("ESTOQUE_INSERT_SUCCESS")); break;

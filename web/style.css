@@ -102,6 +102,9 @@ p.success_msg {
     font-weight: bold;
     line-height: 100%;
 }
+#login a, a:hover {
+    color: white;
+}
 #login table td {
     vertical-align:middle;
 }

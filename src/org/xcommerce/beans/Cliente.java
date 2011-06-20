@@ -166,7 +166,7 @@ public class Cliente implements Serializable {
 	/**
 	 * Encontra um usuario e valida o par senha/email.
 	 * */
-	public static Cliente findValidate(String email, String senha) {
+	public static Cliente findValidate(String email, String senha) throws Exception {
 		Cliente c = new Cliente();
 
 		Session session = DBManager.getSession();
@@ -256,10 +256,13 @@ public class Cliente implements Serializable {
 		c.setNascimento(new Date(1989, 5, 11));
 		c.insert();
 		log.info("Cliente inserido.");
-		
-		Cliente c2 = Cliente.findValidate("ze","123");
-		log.debug(c2.getNome()+" "+c2.getEmail());
-		log.info("Cliente inserido.");
+		try {
+		    Cliente c2 = Cliente.findValidate("ze","123");
+		    log.debug(c2.getNome()+" "+c2.getEmail());
+		    log.info("Cliente inserido.");
+		} catch (Exception e) {
+		    log.error("Erro no findValidate: "+e);
+		}
 	}
 
 	/**

@@ -27,6 +27,12 @@
 	case 504: out.println("success_msg\">"+msg.getString("ESTOQUE_REMOVE_SUCCESS")); break;
 	case 505: out.println("error_msg\">"+msg.getString("ESTOQUE_INSERT_ERROR")); break;
 	case 506: out.println("success_msg\">"+msg.getString("ESTOQUE_INSERT_SUCCESS")); break;
+	
+	//Operações de Produto
+	case 601: out.println("error_msg\">"+msg.getString("ESTOQUE_INSERT_ERROR")); break;
+	case 602: out.println("success_msg\">"+msg.getString("ESTOQUE_INSERT_SUCCESS")); break;
+	case 603: out.println("error_msg\">"+msg.getString("ESTOQUE_REMOVE_ERROR")); break;
+	case 604: out.println("success_msg\">"+msg.getString("ESTOQUE_REMOVE_SUCCESS")); break;
 
 	
 	// Erro inesperado

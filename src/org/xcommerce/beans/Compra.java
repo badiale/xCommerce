@@ -52,6 +52,7 @@ public class Compra implements Serializable {
 		this.codigo = null;
 		this.cliente = null;
 		this.horaCompra = null;
+		this.linhasCompra = new HashSet<LinhaDeCompra>();
 	}
 
 	/*public Compra(int codigo, Cliente cliente, String horaCompra) {
@@ -102,7 +103,6 @@ public class Compra implements Serializable {
 	 * */
 	public Set<LinhaDeCompra> getLinhasCompra() { return this.linhasCompra; }
 
-	public void setLinhasCompra(Set set) { this.linhasCompra = set; }
 	// metodos dos beans
 
 	/**
@@ -211,10 +211,16 @@ public class Compra implements Serializable {
 		cliente.insert();
 
 		Compra c = new Compra();
-		c.setCliente(cliente);
 		c.setHoraCompra("agora!");
-
 		c.insert();
+
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		cliente.getCompras().add(c);
+		session.getTransaction().commit();
+
+		c.setCliente(cliente);
+		c.update();
 
 		log.debug("Compra inserida.");
 	}
@@ -232,11 +238,14 @@ public class Compra implements Serializable {
 
 	// testa find all
 	private static void teste03() {
+		log.debug("Pegando todas");
+		
 		Session session = DBManager.getSession();
 		session.beginTransaction();
-
-		List l = Compra.findAll();
-		log.debug("Pegou todas!");
+		List l = Compra.findAll(); 
+		session.getTransaction().commit();
+		
+		log.debug("Pegou todas as "+l.size()+" contas");
 		
 		Iterator it = l.iterator();
 		while (it.hasNext()) {
@@ -245,24 +254,32 @@ public class Compra implements Serializable {
 		}
 
 		log.debug("Exibiu todas as compras.");
-		
-		session.getTransaction().commit();
 	}
 
 	private static void teste04() {
-		Compra c = new Compra();
-		c = Compra.find(new Integer(1));
-		c.setLinhasCompra(new HashSet<LinhaDeCompra>());
-
+		Produto p = new Produto();
+		p.setNome("abc123");
+		p.insert();
+		
 		LinhaDeCompra lc = new LinhaDeCompra();
-		//lc.setCompra(c);
 		lc.setQuantidade(new Integer(13));
 		lc.setPrecoUnitario(new Float(45.00));
+		lc.setProduto(p);
 		try { lc.insert(); } 
-		catch (Exception e ) { }
-
+		catch (Exception e ) { e.printStackTrace(); }
+		
+		Session session = DBManager.getSession();
+		session.beginTransaction();
+		p.getLinhasCompra().add(lc);
+		session.getTransaction().commit();
+		
+		session = DBManager.getSession();
+		session.beginTransaction();
+		Compra c = Compra.find(new Integer(1));
 		c.getLinhasCompra().add(lc);
-		c.insert();
+		lc.setCompra(c);
+		lc.update();
+		session.getTransaction().commit();
 
 		log.info("Compra encontrada hora: " + c.getHoraCompra());
 		log.info("Nome do usuario da compra: " + c.getCliente().getEmail());
@@ -273,7 +290,7 @@ public class Compra implements Serializable {
 	 * */
 	public static void main (String args[]) {
 		Compra.teste01();
-		Compra.teste02();
+		//Compra.teste02();
 		Compra.teste03();
 		Compra.teste04();
 	}

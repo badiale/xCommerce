@@ -80,7 +80,7 @@ public class CompraServlet extends HttpServlet {
 			//session.beginTransaction();
 			
 			//c.setLinhasCompra(new HashSet<LinhaDeCompra>());		
-			c = Compra.find(Integer.parseInt(request.getParameter("ccode")));
+			c = Compra.find(Integer.parseInt(request.getParameter("pcode")));
 			//session.getTransaction().commit();			
 			Set linhasCompra = c.getLinhasCompra();							
 

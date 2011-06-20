@@ -56,6 +56,10 @@ public class Produto implements Serializable {
 	@JoinColumn(name = "prodid")
 	private Set<Imagem> imagens;
 	
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "prodcod")
+	private Set<LinhaDeCompra> linhasCompra;
+	
 	/**
 	 * Logger que sera usado para esta classe.
 	 * */
@@ -76,6 +80,7 @@ public class Produto implements Serializable {
 		caracteristicas = new Vector<String>();
 		caracteristicasValor = new Vector<String>();
 		imagens = new HashSet<Imagem>();
+		linhasCompra = new HashSet<LinhaDeCompra>();
 	}
 
 	/**
@@ -149,6 +154,13 @@ public class Produto implements Serializable {
 	 * @return conjunto de fotos do produto.
 	 * */
 	public Set<Imagem> getImagens() { return this.imagens; }
+	public void setImagens(Set<Imagem> set) { this.imagens = set; }
+	
+	/**
+	 * Pega o conjunto de linhas de compra no qual o produto se encontra.
+	 * @return conjunto de linhas de compra do produto.
+	 * */
+	public Set<LinhaDeCompra> getLinhasCompra() { return this.linhasCompra; }
 	
 	/**
 	 * Pega o estoque associado ao produto.

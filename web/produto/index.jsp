@@ -19,7 +19,4 @@
 </jsp:include>
 </table>
 
-<!-- se for admin -->
-<a href="/xCommerce/produto/insert.jsp"><%= msg.getString("PRODUTO_INSERT") %></a><br>
-
 <%@include file="/footer.jsp"%>

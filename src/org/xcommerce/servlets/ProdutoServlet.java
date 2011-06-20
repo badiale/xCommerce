@@ -18,9 +18,12 @@ public class ProdutoServlet extends HttpServlet implements Config {
 	private PrintWriter out;
 
 	private final int LIST = 0;
+	private final int INSERT = 1;
+	private final int REMOVE = 3;
 	
 	private void listAll(String search) {
 		List<Produto> produtos = null;
+
 	
 		Session session = DBManager.getSession();
 		session.beginTransaction();
@@ -34,7 +37,9 @@ public class ProdutoServlet extends HttpServlet implements Config {
 		Produto p = null;
 		while(it.hasNext()) {
 			p = (Produto) it.next();
-			Imagem img = p.getImagens().iterator().next();
+			Imagem img = null;
+
+			//img = p.getImagens().iterator().next();
 
 			html += "<tr>";
 			html += "<td width=\"10%\">";
@@ -54,7 +59,7 @@ public class ProdutoServlet extends HttpServlet implements Config {
 			html += "<!-- se for admin -->";
 			html += "<BR><a href=\"/xCommerce/produto/edit.jsp?codigo="+p.getCodigo()+"\""
 				+ msg.getString("PRODUTO_EDIT") +"</a>";
-			html += "<BR><a href=\"/xCommerce/produto?codigo="+p.getCodigo()+"&action=3\">"
+			html += "<BR><a href=\"/xCommerce/produto/remove.jsp?codigo="+p.getCodigo()+"&action=3\">"
 				+msg.getString("PRODUTO_REMOVE")+"</a>";
 			html += "</td>";
 			html += "</tr>";
@@ -70,6 +75,8 @@ public class ProdutoServlet extends HttpServlet implements Config {
 		this.msg = ResourceBundle.getBundle("org.xcommerce.bundles.message", currentLocale);
 		this.out = response.getWriter();
 		
+		String targetUrl;
+		
 		int action = LIST;
 		try {
 			action = Integer.parseInt(request.getParameter("action"));
@@ -81,6 +88,42 @@ public class ProdutoServlet extends HttpServlet implements Config {
 			case LIST: {
 				String search = request.getParameter("search");
 				listAll(search); 
+				break;
+			}
+			case INSERT: {
+				targetUrl = "/xCommerce/message.jsp?msg=602";
+				try {
+							
+							Produto p = new Produto();
+							p.setPreco(Float.parseFloat(request.getParameter("preco")));
+							p.setNome(request.getParameter("nome"));
+							p.setDescricao(request.getParameter("descricao"));
+							p.getCaracteristicas().add(request.getParameter("caracteristica"));
+							p.getCaracteristicasValor().add(request.getParameter("valor"));
+							p.getCaracteristicas().add(request.getParameter("caracteristica2"));
+							p.getCaracteristicasValor().add(request.getParameter("valor2"));
+							p.getCaracteristicas().add(request.getParameter("caracteristica3"));
+							p.getCaracteristicasValor().add(request.getParameter("valor3"));
+							p.setImagens(new HashSet<Imagem>());
+							
+							p.insert();
+							} catch (Exception ex) { ex.printStackTrace(); 
+								targetUrl = "/xCommerce/message.jsp?msg=601";
+							}
+							response.sendRedirect(targetUrl); 
+	
+				break;
+			}
+			
+			case REMOVE: {
+				targetUrl = "/xCommerce/message.jsp?msg=604";
+				try {
+					Produto p = Produto.find(Integer.parseInt(request.getParameter("codigo")));
+					p.remove();
+				} catch (Exception ex) { ex.printStackTrace();
+					targetUrl = "/xCommerce/message.jsp?msg=603";
+				}
+				response.sendRedirect(targetUrl); 
 				break;
 			}
 		}
